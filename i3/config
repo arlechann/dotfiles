@@ -214,7 +214,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym Print exec --no-startup-id import -window root ~/Pictures/screenshot/`date "+%y%m%d_%H%M%S"`.jpg
 
 # startup apps
-#exec --no-startup-id picom -b -CG -D 7 -i 0.9 --active-opacity 0.9
 exec --no-startup-id picom -b -o 1 -c -D 7 -f -i 0.9
 exec --no-startup-id fcitx
 exec --no-startup-id volumeicon
@@ -223,7 +222,6 @@ exec --no-startup-id dunst
 
 # application setting(float)
 for_window [class="Fcitx-config-gtk3"] floating enable, resize set 600 400
-for_window [class="Fcitx-config-gtk3"] floating enable
 
 # set wallpaper
 exec --no-startup-id "feh --bg-scale $HOME/.config/i3/wallpaper"
