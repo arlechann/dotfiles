@@ -4,7 +4,6 @@ compinit
 
 # UTF-8を利用
 case "${OSTYPE}" in
-# Cygwin
 	cygwin*)
 		export LANG=ja_JP.UTF-8
 		chcp 65001 > /dev/null 2> /dev/null
@@ -16,9 +15,24 @@ esac
 # Emacsキーバインドを使う
 bindkey -e
 
+# 色
+autoload -Uz colors
+colors
+
 # プロンプト
-PROMPT="%F{green}[%n@%m]%f%# "
-RPROMPT="%F{cyan}[%d]"
+PROMPT=""
+## git
+autoload -Uz vcs_info
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}"
+zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats "%F{red}[%b %a]%f"
+precmd() { vcs_info }
+## 本体
+setopt prompt_subst
+PROMPT="%F{$(if [ "$UID" = 0 ]; then echo 'red'; else echo 'cyan'; fi)}%n%f@%F{green}%m%f:%F{white}%~%f \${vcs_info_msg_0_}
+%# "
 
 # 環境変数DISPLAYの設定
 #export DISPLAY=:0.0
@@ -74,21 +88,11 @@ fi
 export LSCOLORS=ExFxCxdxBxegedabagacad
 export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
-alias ls="ls --color"
 
 # 補完で大文字小文字区別しない
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
-# SSHリモートログインされた時ログを取る
-#if [ -d ${HOME}/.log ]; then
-#	P_PROC=`ps aux | grep $PPID | grep sshd | awk '{ print $11 }'`
-#	if [ "$P_PROC" = sshd: ]; then
-#		[[ $(ps -ocommand= -p $PPID | awk '{ print $1 }') = script ]] || { script -fq ~/.log/`date +%Y%m%d_%H%M%S`_$USER.log && exit ;}
-#		exit
-#	fi
-#fi
-
-# fzf
+# fzfの設定
 if [ -f "$HOME/.fzf.zsh" ]; then
 	source ~/.fzf.zsh
 fi
@@ -114,12 +118,7 @@ fi
 
 # Vimを使用する
 export EDITOR="vim"
-export VISUAL="vim"
-
-# proxy setting
-if [ -f ~/dotfiles/proxy_functions ]; then
-	source ~/dotfiles/proxy_functions
-fi
+export VISUAL="gvim"
 
 # エイリアス設定
 alias ls="ls --color"

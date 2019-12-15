@@ -34,7 +34,7 @@ UXTerm*geometry: 128x48+256+128
 
 URxvt.saveLines: 32768
 URxvt.scrollBar: false
-URxvt.font: xft:Ricty:pixelsize=18,xft:IPAGothic
+URxvt.font: xft:Ricty:style=Bold:pixelsize=18,xft:IPAexGothic:pixelsize=18,xft:IPAGothic:pixelsize=18
 URxvt.depth: 32
 URxvt.foreground: rgba:ffff/ffff/ffff/ffff
 URxvt.background: rgba:0000/0000/0000/cccc
