@@ -1,0 +1,8 @@
+[[plugins]]
+repo = 'Shougo/vimshell.vim'
+on_source = 'vimproc.vim'
+
+[[plugins]]
+repo = 'kovisoft/slimv'
+on_ft = ['lisp']
+

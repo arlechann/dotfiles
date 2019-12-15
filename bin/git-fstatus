@@ -1,0 +1,20 @@
+#!/bin/sh
+
+usage() {
+cat << EOF
+git-fstatus version 0.0.1
+
+Print selected file name(s).
+This command delegete argument, except -h option, to fzf.
+EOF
+}
+
+case "$1" in
+	-h)
+	shift
+	usage
+	exit 0
+	;;
+esac
+
+unbuffer git status -b -s -uall | fzf --header-lines=1 --preview "git --no-pager diff --color {-1}" $@ | awk '{print $NF}'

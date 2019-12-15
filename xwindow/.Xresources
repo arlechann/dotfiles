@@ -1,0 +1,47 @@
+!
+!xterm
+!
+
+XTerm*utf8: 1
+XTerm*locale: true
+XTerm*selectToClipboard: true
+XTerm*faceName: 'Monospace'
+XTerm*faceSize: 13
+XTerm*cjkWidth: true
+XTerm*background: black
+XTerm*foreground: white
+XTerm*savelines: 2048
+XTerm*geometry: 128x48+256+128
+
+!
+!uxterm
+!
+
+UXTerm*utf8: 1
+UXTerm*locale: true
+UXTerm*selectToClipboard: true
+UXTerm*faceName: 'Monospace'
+UXTerm*faceSize: 13
+UXTerm*cjkWidth: true
+UXTerm*background: black
+UXTerm*foreground: white
+UXTerm*savelines: 2048
+UXTerm*geometry: 128x48+256+128
+
+!
+!urxvt
+!
+
+URxvt.saveLines: 32768
+URxvt.scrollBar: false
+URxvt.font: xft:Ricty:pixelsize=18,xft:IPAGothic
+URxvt.depth: 32
+URxvt.foreground: rgba:ffff/ffff/ffff/ffff
+URxvt.background: rgba:0000/0000/0000/cccc
+URxvt.color12: rgb:5c/5c/ff
+URxvt.fading: 16
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+URxvt.perl-ext-common: xim-onthespot
+URxvt.inputMethod: fcitx
+URxvt.preeditType: OnTheSpot

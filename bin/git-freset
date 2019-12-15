@@ -1,0 +1,26 @@
+#!/bin/sh
+
+usage() {
+cat << EOF
+git-freset version 0.0.1
+
+Unstage selected file(s).
+EOF
+}
+
+staged_file() {
+	unbuffer git status -b -s -uall |
+		grep -oE '(^##|^(\[[0-9]{1,2}m)?[^ ?](\[m)?(\[[0-9]{1,2}m)?.(\[m)? .*$)' |
+		fzf --header-lines=1 --preview "git --no-pager diff --color -- {-1}" $@ |
+		awk '{print $NF}'
+}
+
+case "$1" in
+	-h)
+	shift
+	usage
+	exit 0
+	;;
+esac
+
+staged_file -m | xargs -r git reset

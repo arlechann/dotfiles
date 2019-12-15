@@ -1,0 +1,20 @@
+#!/bin/sh
+
+usage() {
+cat << EOF
+git-fbranch version 0.0.1
+
+Print selected branch name(s).
+This command delegates arguments, except -h options, to fzf.
+EOF
+}
+
+case "$1" in
+	-h)
+		shift
+		usage
+		exit 0
+		;;
+esac
+
+git branch -va --color | fzf --preview "git show --color {+1}" $@ | sed 's/^\*/ /' | awk '$0=$1'

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+usage() {
+cat << EOF
+git-frestore version 0.0.1
+
+Restore selected file(s) to last commit.
+EOF
+}
+
+case "$1" in
+	-h)
+	shift
+	usage
+	exit 0
+	;;
+esac
+
+git fstatus -m | xargs -r git restore

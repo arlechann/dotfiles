@@ -1,0 +1,15 @@
+" slimvの設定
+let g:slimv_repl_name = 'REPL'
+let g:slimv_repl_split = 3 " 3:縦分割REPL左 4:縦分割REPL右
+let g:slimv_repl_simple_eval = 0 " <C-Enter>で評価
+let g:slimv_lisp = 'ros run'
+let g:slimv_impl = 'sbcl'
+let g:swank_port = 4005
+let g:slimv_swank_cmd = "!ros -e '(ql:quickload :swank) (swank:create-server)' wait > /dev/null 2>&1 &"
+nnoremap <silent> ,ql :!qlot exec ros -e '(ql:quickload :swank) (swank:create-server)' wait > /dev/null 2>&1 &<CR>
+
+" lisp一般
+setlocal expandtab
+let lisp_rainbow = 1
+let g:paredit_mode = 0
+let g:paredit_electric_return = 0

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+usage() {
+cat << EOF
+git-fswitch version 0.0.1
+
+Switch to selected branch.
+EOF
+}
+
+case "$1" in
+	-h)
+		shift
+		usage
+		exit 0
+		;;
+esac
+
+git fbranch | sed -E 's@^remotes/[^/]*/@@' | xargs -r git switch
