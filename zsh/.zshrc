@@ -32,7 +32,7 @@ precmd() { vcs_info }
 ## 本体
 setopt prompt_subst
 PROMPT="%F{$(if [ "$UID" = 0 ]; then echo 'red'; else echo 'cyan'; fi)}%n%f@%F{green}%m%f:%F{white}%~%f \${vcs_info_msg_0_}
-%(?,%F{white},%F{red})%(!,#,$)%f "
+%(?,%F{white},%F{yellow})%(!,#,$)%f "
 
 # 環境変数DISPLAYの設定
 #export DISPLAY=:0.0
