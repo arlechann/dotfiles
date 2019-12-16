@@ -19,20 +19,29 @@ bindkey -e
 autoload -Uz colors
 colors
 
+# precmd
+precmd() {
+	vcs_info
+	if [ -n "$TMUX" ]; then
+		tmux refresh-client -S
+	fi
+}
+
 # プロンプト
-PROMPT=""
+PROMPT="%(?,%F{white},%F{yellow})%(!,#,$)%f "
 ## git
 autoload -Uz vcs_info
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}"
-zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
-zstyle ':vcs_info:*' actionformats "%F{red}[%b %a]%f"
-precmd() { vcs_info }
-## 本体
-setopt prompt_subst
-PROMPT="%F{$(if [ "$UID" = 0 ]; then echo 'red'; else echo 'cyan'; fi)}%n%f@%F{green}%m%f:%F{white}%~%f \${vcs_info_msg_0_}
+if [ -z "$TMUX" ]; then
+	zstyle ':vcs_info:git:*' check-for-changes true
+	zstyle ':vcs_info:git:*' stagedstr "%F{yellow}"
+	zstyle ':vcs_info:git:*' unstagedstr "%F{red}"
+	zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
+	zstyle ':vcs_info:*' actionformats "%F{red}[%b %a]%f"
+	## 本体
+	setopt prompt_subst
+	PROMPT="%F{$(if [ "$UID" = 0 ]; then echo 'red'; else echo 'cyan'; fi)}%n%f@%F{green}%m%f:%F{white}%~%f \${vcs_info_msg_0_}
 %(?,%F{white},%F{yellow})%(!,#,$)%f "
+fi
 
 # 環境変数DISPLAYの設定
 #export DISPLAY=:0.0
