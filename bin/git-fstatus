@@ -17,4 +17,4 @@ case "$1" in
 	;;
 esac
 
-unbuffer git status -b -s -uall | fzf --header-lines=1 --preview "git --no-pager diff --color {-1}" $@ | awk '{print $NF}'
+unbuffer git status -b -s -uall | fzf --header-lines=1 --height=100% --preview "git --no-pager diff --color {-1}" $@ | awk '{print $NF}'

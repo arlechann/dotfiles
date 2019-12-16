@@ -16,4 +16,4 @@ case "$1" in
 	;;
 esac
 
-find . | fzf -m --preview "bat -n --color=always --paging=never {}" | xargs -r git rm
+find . | fzf -m --height=100% --preview "bat -n --color=always --paging=never {}" | xargs -r git rm

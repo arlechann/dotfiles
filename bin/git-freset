@@ -11,7 +11,7 @@ EOF
 staged_file() {
 	unbuffer git status -b -s -uall |
 		grep -oE '(^##|^(\[[0-9]{1,2}m)?[^ ?](\[m)?(\[[0-9]{1,2}m)?.(\[m)? .*$)' |
-		fzf --header-lines=1 --preview "git --no-pager diff --color -- {-1}" $@ |
+		fzf --header-lines=1 --height=100% --preview "git --no-pager diff --color -- {-1}" $@ |
 		awk '{print $NF}'
 }
 

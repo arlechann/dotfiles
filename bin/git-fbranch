@@ -17,4 +17,4 @@ case "$1" in
 		;;
 esac
 
-git branch -va --color | fzf --preview "git show --color {+1}" $@ | sed 's/^\*/ /' | awk '$0=$1'
+git branch -va --color | fzf --height=100% --preview "git show --color {+1}" $@ | sed 's/^\*/ /' | awk '$0=$1'
