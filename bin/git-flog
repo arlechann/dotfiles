@@ -17,5 +17,5 @@ case "$1" in
 esac
 
 git log --graph --color --all --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" |
-	fzf --no-sort --tiebreak=index --preview 'git show --color `echo {} | grep -o "[a-f0-9]\{7\}"`' |
+	fzf --no-sort --tiebreak=index --height=100% --preview 'git show --color `echo {} | grep -o "[a-f0-9]\{7\}"`' |
 	grep -o '[a-f0-9]\{7\}'
