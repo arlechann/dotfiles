@@ -127,7 +127,7 @@ fi
 
 # Vimを使用する
 export EDITOR="vim"
-export VISUAL="gvim"
+export VISUAL="vim"
 
 # エイリアス設定
 alias ls="ls --color"
