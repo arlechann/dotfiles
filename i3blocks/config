@@ -1,0 +1,40 @@
+[memory]
+label=Mem 
+command=free -h | awk '/^Mem/{print $3,"/",$2}'
+color=#9ee3e5
+interval=1
+
+[CPU]
+label=CPU 
+command=printf "%.1f %%\n" $(echo "$(uptime | sed -E 's/^.*load average: ([^,]*).*$/\1/') * 100 / $(cat /proc/cpuinfo | grep -c processor)" | bc)
+color=#439ad3
+interval=1
+
+[network]
+label=📶
+command=[[ $(iw dev wlp4s0 link) != 'Not connected.' ]] && echo "$(iw dev wlp4s0 link | sed '/SSID/!d;s/ //g;s/[^:]*://') / -$(iw dev wlp4s0 link | grep signal | grep -o '[0-9]*')dBm"
+color=#9ee3e5
+interval=1
+
+[lightness]
+label=☀
+command=xbacklight -get | xargs printf '%.0f %%\n'
+color=#439ad3
+interval=5
+signal=2
+
+[volume]
+label=🔊
+command=[[ $(pactl list sinks | grep 'Mute:' | cut -d' ' -f2) == 'no' ]] && color='#439ad3' || color='#6e7177' && pactl list sinks | grep -o '[0-9]*%' | head -1 | sed -E 's/^([0-9]{2})%/\1 %/' && echo -e "\n${color}"
+interval=5
+signal=1
+
+[time]
+command=bash -c 'watch=(🕛 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚); now=$(date +%H:%M:%S); echo "${watch[$(echo $now | cut -d: -f1)]} $now"'
+color=#9ee3e5
+interval=1
+
+[battery]
+label=🔋
+command=bash ~/.config/i3blocks/battery.sh
+interval=1
