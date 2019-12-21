@@ -1,6 +1,6 @@
 #!/bin/bash
 
-current_path="#[fg=cyan,bg=colour238] $1 "
+current_path="#[fg=cyan,bg=colour238] ${1/$HOME/'~'} "
 git_status=$(cd $1; git status -s)
 if $? ; then
 	echo "$current_path#[bg=cyan] "
