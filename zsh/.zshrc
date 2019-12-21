@@ -118,10 +118,7 @@ if [ -f "$(which fzf)" ]; then
 fi
 
 # tmuxを自動起動する
-if [ -f $(which tmux) ] && \
-	[ $SHLVL = 1 ] && \
-	[ "$(cat /proc/$PPID/cmdline | cut -d: -f1)" != "sshd" ] && \
-	! uname -r | grep -i microsoft > /dev/null; then
+if [ -z "$TMUX" ] && [ $SHLVL = 1 ]; then
 	tmux
 fi
 
