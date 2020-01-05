@@ -44,11 +44,11 @@ fuzzyfind() {
 }
 
 fdir() {
-	find . -type d | sed 's@^\./@@' | fzf --preview "ls --color {}" $@
+	find . -type d | sed 's@^\./@@' | fzf --height=100% --preview "ls --color {}" $@
 }
 
 ffile() {
-	find . -type f | sed 's@^\./@@' |  fzf --preview "bat -n --color=always --paging=never {}" $@
+	find . -type f | sed 's@^\./@@' |  fzf --height=100% --preview "bat -n --color=always --paging=never {}" $@
 }
 
 fcd() {
@@ -56,7 +56,7 @@ fcd() {
 }
 
 fls() {
-	ls -lah $1 | fzf -m --header-lines=1 --preview "bat -n --color=always --paging=never $1/{+9}" | awk '$0=$9'
+	ls -lah $1 | fzf -m --height=100% --header-lines=1 --preview "bat -n --color=always --paging=never $1/{+9}" | awk '$0=$9'
 }
 
 frm() {
@@ -83,7 +83,7 @@ fopen() {
 ## systemctl
 
 fsyslist() {
-	systemctl list-unit-files -a --no-pager | head -n-7 | fzf --with-nth=1 --header-lines=1 --preview "unbuffer systemctl status --no-pager | sed '/^$/,/$$/d'" $@ | awk '$0=$1'
+	systemctl list-unit-files -a --no-pager | head -n-7 | fzf --with-nth=1 --header-lines=1 --height=100% --preview "unbuffer systemctl status --no-pager | sed '/^$/,/$$/d'" $@ | awk '$0=$1'
 }
 
 fsysstatus() {
@@ -124,7 +124,7 @@ fsysdisable() {
 ## docker
 
 fdimages() {
-	local image=$(sudo docker images)
+	local images=$(sudo docker images)
 	echo "$images" | fzf --header-lines=1 $@ | awk '$0=$3'
 }
 
