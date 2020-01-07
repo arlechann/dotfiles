@@ -28,7 +28,7 @@ precmd() {
 }
 
 # プロンプト
-PROMPT="%(?,%F{white},%F{yellow})%(!,#,$)%f "
+PROMPT="%(?,%F{white},%F{red})%(!,#,$)%f "
 ## git
 autoload -Uz vcs_info
 if [ -z "$TMUX" ]; then
@@ -40,7 +40,7 @@ if [ -z "$TMUX" ]; then
 	## 本体
 	setopt prompt_subst
 	PROMPT="%F{$(if [ "$UID" = 0 ]; then echo 'red'; else echo 'cyan'; fi)}%n%f@%F{green}%m%f:%F{white}%~%f \${vcs_info_msg_0_}
-%(?,%F{white},%F{yellow})%(!,#,$)%f "
+%(?,%F{white},%F{red})%(!,#,$)%f "
 fi
 
 # 環境変数DISPLAYの設定
@@ -64,6 +64,11 @@ setopt EXTENDED_HISTORY
 
 # globでno matchの警告を出さない
 setopt nonomatch
+
+# syntax highlight
+if [ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # rbenvの設定
 if [ -d ${HOME}/.rbenv ]; then

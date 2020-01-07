@@ -30,7 +30,7 @@ interval=5
 signal=1
 
 [time]
-command=bash -c 'watch=(🕛 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚); now=$(date +%H:%M:%S); echo "${watch[$(echo $now | cut -d: -f1)]} $now"'
+command=bash -c 'watch=(🕛 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚); now=$(date +%H:%M:%S); echo "${watch[$(echo $now | cut -d: -f1 | sed 's/^0*//')]} $now"'
 color=#9ee3e5
 interval=1
 
