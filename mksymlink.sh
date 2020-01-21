@@ -19,3 +19,6 @@ find "$DOTFILES/i3blocks" -maxdepth 1 -type f | while read file; do ln -Ffs "$fi
 unlink "$HOME/.vim"
 ln -s "$DOTFILES/vimfiles" "$HOME/.vim"
 
+if [ -f "$DOTFILES/local/mksymlink.sh" ]; then
+	bash "$DOTFILES/local/mksymlink.sh"
+fi
