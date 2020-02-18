@@ -4,9 +4,9 @@ command=free -h | awk '/^Mem/{print $3,"/",$2}'
 color=#9ee3e5
 interval=1
 
-[CPU]
-label=CPU 
-command=printf "%.1f %%\n" $(echo "$(uptime | sed -E 's/^.*load average: ([^,]*).*$/\1/') * 100 / $(cat /proc/cpuinfo | grep -c processor)" | bc)
+[load average]
+label=load average 
+command=uptime | grep -o '[0-9.]*' | tail -n3 | head -n1
 color=#439ad3
 interval=1
 
@@ -30,7 +30,7 @@ interval=5
 signal=1
 
 [time]
-command=bash -c 'watch=(🕛 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚); now=$(date +%H:%M:%S); echo "${watch[$(echo $now | cut -d: -f1 | sed 's/^0*//')]} $now"'
+command=watch=(🕛 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚) echo "${watch[$(date +%H | 'sed s/^0*//')]} $(date +%H:%M:%S)"
 color=#9ee3e5
 interval=1
 

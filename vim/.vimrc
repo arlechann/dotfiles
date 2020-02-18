@@ -73,7 +73,8 @@ set cursorline		" カーソル行の背景色を変える
 set nocursorcolumn	"カーソル位置のカラムの背景色を変えない
 set laststatus=2	" ステータス行を常に表示
 " ステータス行に文字コード，改行コードを表示する
-set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P\ "set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P\ 
+set statusline=%<%f\ %y%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}\ %r%h%w\ %m\ %=\ (%v,%l)/%L%8P\ 
+"set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P\ 
 set cmdheight=1		" メッセージ表示欄を1行確保
 set showcmd			" 入力中のコマンドを表示する
 set showmatch		" 対応する括弧を強調表示
@@ -224,4 +225,17 @@ endfunction
 augroup vimrc-asm
 	autocmd!
 	autocmd FileType asm call s:asm()
+augroup END
+
+" Markdown
+function! s:markdown()
+	setlocal expandtab
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+	setlocal softtabstop=2
+endfunction
+
+augroup vimrc-markdown
+	autocmd!
+	autocmd FileType markdown call s:markdown()
 augroup END

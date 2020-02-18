@@ -83,6 +83,11 @@ if [ -d ${HOME}/.pyenv ]; then
 	eval "$(pyenv init -)"
 fi
 
+# goの設定
+if [ -d ${HOME}/go ]; then
+	export PATH=${HOME}/go/bin:$PATH
+fi
+
 # nvmの設定
 if [ -e /usr/share/nvm/init-nvm.sh ]; then
 	source /usr/share/nvm/init-nvm.sh
