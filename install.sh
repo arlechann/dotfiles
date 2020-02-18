@@ -20,5 +20,4 @@ unlink "$HOME/.vim"
 ln -s "$SCRIPT_PATH/vimfiles" "$HOME/.vim"
 
 [ -f "$SCRIPT_PATH/local/mksymlink.sh" ] && "$SCRIPT_PATH/local/mksymlink.sh"
-#[ -d "$SCRIPT_PATH/shellutils" ] || (git clone https://github.com/arlechann/shellutils.git && "$SCRIPT_PATH/shellutils/install.sh")
-"$SCRIPT_PATH/shellutils/install.sh"
+[ -d "$SCRIPT_PATH/shellutils" ] || (git clone https://github.com/arlechann/shellutils.git && "$SCRIPT_PATH/shellutils/install.sh")
