@@ -137,7 +137,7 @@ export EDITOR="vim"
 export VISUAL="vim"
 
 # エイリアス設定
-alias ls="ls --color"
+alias ls="ls --color=auto"
 alias ll="ls -l -F --color"
 alias la="ls -a -F --color"
 alias lla="ls -a -l -F --color"
