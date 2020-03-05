@@ -239,3 +239,16 @@ augroup vimrc-markdown
 	autocmd!
 	autocmd FileType markdown call s:markdown()
 augroup END
+
+" yaml
+function! s:yaml()
+	setlocal expandtab
+	setlocal tabstop=4
+	setlocal shiftwidth=4
+	setlocal softtabstop=4
+endfunction
+
+augroup vimrc-yaml
+	autocmd!
+	autocmd FileType yaml call s:yaml()
+augroup END
