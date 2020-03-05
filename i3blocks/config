@@ -1,14 +1,20 @@
 [memory]
 label=Mem 
 command=free -h | awk '/^Mem/{print $3,"/",$2}'
-color=#9ee3e5
+color=#439ad3
 interval=1
 
 [load average]
 label=load average 
 command=uptime | grep -o '[0-9.]*' | tail -n3 | head -n1
-color=#439ad3
+color=#9ee3e5
 interval=1
+
+[disk used]
+label=💾
+command=df -h | grep '/$' | awk '{print $3 "/" $2, $4}'
+color=#439ad3
+interval=60
 
 [network]
 label=📶
