@@ -117,7 +117,7 @@ if [ -f "$HOME/.fzf.zsh" ]; then
 fi
 
 if [ -f "$(which fzf)" ]; then
-	export FZF_DEFAULT_OPTS='--ansi --border --reverse --height=50%'
+	export FZF_DEFAULT_OPTS='--ansi --border --reverse --height=80%'
 
 	fzf-history() {
 		BUFFER=$(history -r 1 | fzf --query "$LBUFFER" | cut -d' ' -f4-)
