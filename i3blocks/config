@@ -12,7 +12,7 @@ interval=1
 
 [disk used]
 label=💾
-command=df -h | grep '/$' | awk '{print $3 "/" $2, $4}'
+command=df -h | grep '/$' | awk '{print $3 "/" $2, $5}'
 color=#439ad3
 interval=60
 
