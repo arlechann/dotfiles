@@ -1,0 +1,3 @@
+#!/bin/bash
+
+tee >(xsel -i -p) | xsel -i -b
