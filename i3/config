@@ -194,9 +194,6 @@ bindsym $mod+Delete mode "$mode_system"
 
 exec --no-startup-id xss-lock -- i3lock -n -i ~/.config/i3/locker_wallpaper
 
-# set borders invisible
-for_window [class="^.*"] border pixel 0
-
 # set gaps (only for i3-gaps)
 gaps inner 10
 
@@ -218,10 +215,16 @@ exec --no-startup-id picom --config ~/.config/picom/picom.conf -b -o 1 -c -D 7 -
 exec --no-startup-id fcitx
 exec --no-startup-id volumeicon
 exec --no-startup-id nm-applet
+#exec --no-startup-id blueman-manager
+exec --no-startup-id blueman-applet
 exec --no-startup-id dunst
+
+# set borders invisible
+for_window [class="^.*"] border pixel 0
 
 # application setting(float)
 for_window [class="Fcitx-config-gtk3"] floating enable, resize set 600 400
+for_window [class="Blueman-manager"] floating enable, resize set 600 400
 
 # set wallpaper
 exec --no-startup-id "feh --bg-scale $HOME/.config/i3/wallpaper"

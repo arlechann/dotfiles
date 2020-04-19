@@ -36,7 +36,7 @@ interval=5
 signal=1
 
 [time]
-command=watch=(🕛 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚) echo "${watch[$(date +%H | 'sed s/^0*//')]} $(date +%H:%M:%S)"
+command=watch=(🕛 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚); echo "${watch[$(date +%H)]} $(date +%H:%M:%S)"
 color=#9ee3e5
 interval=1
 
