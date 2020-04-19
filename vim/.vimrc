@@ -227,6 +227,32 @@ augroup vimrc-asm
 	autocmd FileType asm call s:asm()
 augroup END
 
+" html
+function! s:html()
+	setlocal expandtab
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+	setlocal softtabstop=2
+endfunction
+
+augroup vimrc-html
+	autocmd!
+	autocmd FileType html,htmldjango call s:html()
+augroup END
+
+" css
+function! s:css()
+	setlocal expandtab
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+	setlocal softtabstop=2
+endfunction
+
+augroup vimrc-css
+	autocmd!
+	autocmd FileType css call s:css()
+augroup END
+
 " Markdown
 function! s:markdown()
 	setlocal expandtab
