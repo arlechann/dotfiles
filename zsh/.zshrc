@@ -128,7 +128,7 @@ if [ -f "$(which fzf)" ]; then
 fi
 
 # tmuxを自動起動する
-if [ -z "$TMUX" ] && [ $SHLVL = 1 ] && [ "$TERM_PROGRAM" != "vscode" ]; then
+if [ -z "$TMUX" ] && [ $SHLVL = 1 ] && [ -z "$SSH_TTY" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
 	tmux
 fi
 
