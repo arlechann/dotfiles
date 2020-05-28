@@ -5,10 +5,10 @@ SCRIPT_PATH=$(cd $(dirname $0); pwd)
 find "$SCRIPT_PATH/zsh" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/$(basename $file)"; done
 find "$SCRIPT_PATH/vim" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/$(basename $file)"; done
 find "$SCRIPT_PATH/tmux" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/$(basename $file)"; done
-find $SCRIPT_PATH/tmux/bin -maxdepth 1 -type f | while read file; do ln -Ffs $file $HOME/bin/$(basename $file); done
 
 mkdir -p "$HOME/bin"
 find "$SCRIPT_PATH/bin" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/bin/$(basename $file)"; done
+find $SCRIPT_PATH/tmux/bin -maxdepth 1 -type f | while read file; do ln -Ffs $file $HOME/bin/$(basename $file); done
 
 find "$SCRIPT_PATH/xwindow" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/$(basename $file)"; done
 mkdir -p "$HOME/.config/i3"
