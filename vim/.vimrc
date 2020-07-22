@@ -215,6 +215,19 @@ augroup END
 " Scheme
 autocmd BufRead,BufNewfile *.scm setfiletype lisp
 
+" PHP
+function! s:php()
+	setlocal expandtab
+	setlocal tabstop=4
+	setlocal shiftwidth=4
+	setlocal softtabstop=4
+endfunction
+
+augroup vimrc-php
+	autocmd!
+	autocmd FileType php call s:php()
+augroup END
+
 " Assembler
 function! s:asm()
 	setlocal tabstop=8
@@ -269,9 +282,9 @@ augroup END
 " yaml
 function! s:yaml()
 	setlocal expandtab
-	setlocal tabstop=4
-	setlocal shiftwidth=4
-	setlocal softtabstop=4
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+	setlocal softtabstop=2
 endfunction
 
 augroup vimrc-yaml
