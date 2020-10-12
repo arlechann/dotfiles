@@ -156,6 +156,9 @@ case "${OSTYPE}" in
 	linux*)
 		alias vscode="code-oss"
 		alias open="xdg-open"
+		if [ -n "$WSLENV" ]; then
+			# WSL
+		fi
 		;;
 esac
 
