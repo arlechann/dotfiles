@@ -102,6 +102,11 @@ if [ -e ${HOME}/.roswell ]; then
 	export PATH=${HOME}/.roswell/bin:$PATH
 fi
 
+# cargoの設定
+if [ -d ${HOME}/.cargo ]; then
+	source ${HOME}/.cargo/env
+fi
+
 # ~/bin
 if [ -d ${HOME}/bin ]; then
 	export PATH=$HOME/bin:$PATH
