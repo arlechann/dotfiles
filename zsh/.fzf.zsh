@@ -169,8 +169,8 @@ command
 
 		[ -n "$container_id" ] && [ -n "$container_file" ] && [ -n "$host_dir" ] && sudo docker cp "$container_id:$container_file" "$host_dir"
 	elif [ "$1" ==  "push" ]; then
+		local host_file=$(find ./ | fzf --header="host")
 		local container_id=$(fdps)
-		local host_file=$(find . | fzf --header="host")
 		local container_dir=$(sudo docker exec "$container_id" find / | fzf --header="container dir")
 
 		[ -n "$container_id" ] && [ -n "$container_dir" ] && [ -n "$host_file" ] && sudo docker cp "$host_file" "$container_id:$container_dir"
