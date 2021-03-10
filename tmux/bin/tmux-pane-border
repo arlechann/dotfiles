@@ -14,7 +14,7 @@ if [ -z "$git_status" ]; then
 fi
 
 if echo "$git_status" | grep '^.[^ ] ' > /dev/null; then
-	echo "$current_path#[fg=white,bg=red,bright] $branch "
+	echo "$current_path#[fg=white,bg=red] $branch "
 	exit 0
 fi
 
