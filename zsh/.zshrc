@@ -70,6 +70,11 @@ if [ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.
 	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# javaの設定
+if [ -n "$(which java)" ]; then
+	export JAVA_HOME=$(echo $(readlink $(readlink $(which javac))) | sed 's@/bin/javac@@')
+fi
+
 # rbenvの設定
 if [ -d ${HOME}/.rbenv ]; then
 	export PATH="$HOME/.rbenv/bin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
