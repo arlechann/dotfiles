@@ -71,7 +71,7 @@ if [ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.
 fi
 
 # javaの設定
-if [ -n "$(which java)" ]; then
+if [ -n "$(which javac)" ]; then
 	export JAVA_HOME=$(echo $(readlink $(readlink $(which javac))) | sed 's@/bin/javac@@')
 fi
 
