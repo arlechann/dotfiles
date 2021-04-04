@@ -28,7 +28,7 @@ precmd() {
 }
 
 # プロンプト
-PROMPT="%(?,%F{white},%F{red})%(!,#,$)%f "
+PROMPT="%(?,,%F{red})%(!,#,$)%f "
 ## git
 autoload -Uz vcs_info
 if [ -z "$TMUX" ]; then
