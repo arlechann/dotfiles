@@ -177,7 +177,7 @@ bar {
 }
 
 # set Locker
-set $Locker i3lock && sleep 1
+set $Locker light-locker-command -l && sleep 1
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
 	bindsym l exec --no-startup-id $Locker, mode "default"
@@ -192,7 +192,7 @@ mode "$mode_system" {
 
 bindsym $mod+Delete mode "$mode_system"
 
-exec --no-startup-id xss-lock -- i3lock -n -i ~/.config/i3/locker_wallpaper
+exec --no-startup-id xss-lock -- light-locker-command -l
 
 # set gaps (only for i3-gaps)
 gaps inner 10
