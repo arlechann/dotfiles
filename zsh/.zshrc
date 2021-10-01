@@ -5,10 +5,6 @@ compinit
 # Emacsキーバインドを使う
 bindkey -e
 
-# 色
-autoload -Uz colors
-colors
-
 # precmd
 precmd() {
 	vcs_info
