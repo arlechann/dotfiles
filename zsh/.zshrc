@@ -2,16 +2,6 @@
 autoload -Uz compinit
 compinit
 
-# UTF-8を利用
-case "${OSTYPE}" in
-	cygwin*)
-		export LANG=ja_JP.UTF-8
-		chcp 65001 > /dev/null 2> /dev/null
-		;;
-	linux*)
-		;;
-esac
-
 # Emacsキーバインドを使う
 bindkey -e
 
@@ -22,26 +12,19 @@ colors
 # precmd
 precmd() {
 	vcs_info
-	if [ -n "$TMUX" ]; then
-		tmux refresh-client -S
-	fi
 }
 
 # プロンプト
-PROMPT="%(?,,%F{red})%(!,#,$)%f "
-## git
 autoload -Uz vcs_info
-if [ -z "$TMUX" ]; then
-	zstyle ':vcs_info:git:*' check-for-changes true
-	zstyle ':vcs_info:git:*' stagedstr "%F{yellow}"
-	zstyle ':vcs_info:git:*' unstagedstr "%F{red}"
-	zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
-	zstyle ':vcs_info:*' actionformats "%F{red}[%b %a]%f"
-	## 本体
-	setopt prompt_subst
-	PROMPT="%F{$(if [ "$UID" = 0 ]; then echo 'red'; else echo 'cyan'; fi)}%n%f@%F{green}%m%f:%F{white}%~%f \${vcs_info_msg_0_}
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}"
+zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats "%F{red}[%b %a]%f"
+## 本体
+setopt prompt_subst
+PROMPT="%F{$(if [ "$UID" = 0 ]; then echo 'red'; else echo 'cyan'; fi)}%n%f@%F{green}%m%f:%F{white}%~%f \${vcs_info_msg_0_}
 %(?,%F{white},%F{red})%(!,#,$)%f "
-fi
 
 # 環境変数DISPLAYの設定
 #export DISPLAY=:0.0
@@ -59,19 +42,14 @@ setopt hist_reduce_blanks
 setopt hist_save_no_dups
 setopt hist_no_store
 setopt hist_expand
-#setopt inc_append_history
+setopt inc_append_history
 setopt EXTENDED_HISTORY
 
 # globでno matchの警告を出さない
 setopt nonomatch
 
-# syntax highlight
-if [ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
-	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
 # javaの設定
-if [ -n "$(which javac)" ]; then
+if [ ! "$(which javac)" = 'javac not found' ]; then
 	export JAVA_HOME=$(echo $(readlink $(readlink $(which javac))) | sed 's@/bin/javac@@')
 fi
 
@@ -79,18 +57,6 @@ fi
 if [ -d ${HOME}/.rbenv ]; then
 	export PATH="$HOME/.rbenv/bin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 	eval "$(rbenv init -)"
-fi
-
-# pyenvの設定
-if [ -d ${HOME}/.pyenv ]; then
-	export PYENV_ROOT=$HOME/.pyenv
-	export PATH=$PYENV_ROOT/bin:$PATH
-	eval "$(pyenv init -)"
-fi
-
-# goの設定
-if [ -d ${HOME}/go ]; then
-	export PATH=${HOME}/go/bin:$PATH
 fi
 
 # nvmの設定
@@ -130,7 +96,7 @@ if [ -f "$HOME/.fzf.zsh" ]; then
 	source ~/.fzf.zsh
 fi
 
-if [ -f "$(which fzf)" ]; then
+if [ ! "$(which fzf)" = 'fzf not found' ]; then
 	export FZF_DEFAULT_OPTS='--ansi --border --reverse --height=80%'
 
 	fzf-history() {
@@ -151,24 +117,15 @@ export EDITOR="vim"
 export VISUAL="vim"
 
 # エイリアス設定
-alias ls="ls --color=auto"
+alias ls="ls --color"
 alias ll="ls -l -F --color"
 alias la="ls -a -F --color"
 alias lla="ls -a -l -F --color"
 alias emacs="emacs -nw"
 alias crontab="crontab -i"
+alias open="xdg-open"
 
-case "${OSTYPE}" in
-	cygwin*)
-		alias runx='run xwin -multiwindow -noclipboard'
-		alias gvim="/cygdrive/D/Program\ Files/vim/vim74-kaoriya-win64/gvim.exe"
-		;;
-	linux*)
-		alias vscode="code-oss"
-		alias open="xdg-open"
-		if [ -n "$WSLENV" ]; then
-			# WSL
-		fi
-		;;
-esac
+if [ -n "$WSLENV" ]; then
+	# WSL
+fi
 

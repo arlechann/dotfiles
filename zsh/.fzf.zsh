@@ -19,16 +19,6 @@ export FZF_COMPLETION_OPTS='-m'
 
 # Functions
 
-## depending packages
-
-dependencies() {
-	local list=""
-	[ ! -f "$(which unbuffer)" ] && list="$list\"expect\" "
-	[ "$list" != "" ] && echo -e "Please install next packages \n$list" 1>&2
-}
-
-dependencies
-
 ## shell utils
 
 fhistory() {
@@ -78,47 +68,6 @@ fvim() {
 
 fopen() {
 	ffile -m | xargs -r xdg-open
-}
-
-## systemctl
-
-fsyslist() {
-	systemctl list-unit-files -a --no-pager | head -n-7 | fzf --with-nth=1 --header-lines=1 --height=100% --preview "unbuffer systemctl status --no-pager | sed '/^$/,/$$/d'" $@ | awk '$0=$1'
-}
-
-fsysstatus() {
-	local service=$(fsyslist -m)
-	[ -n "$service" ] && systemctl status "$service" $@
-}
-
-fsysstart() {
-	local service=$(fsyslist -m)
-	[ -n "$service" ] && sudo systemctl start "$service"
-}
-
-fsysstop() {
-	local service=$(fsyslist -m)
-	[ -n "$service" ] && sudo systemctl stop "$service"
-}
-
-fsysrestart() {
-	local service=$(fsyslist -m)
-	[ -n "$service" ] && sudo systemctl restart "$service"
-}
-
-fsyskill() {
-	local service=$(fsyslist -m)
-	[ -n "$service" ] && sudo systemctl kill "$service"
-}
-
-fsysenable() {
-	local service=$(fsyslist -m)
-	[ -n "$service" ] && sudo systemctl enable "$service"
-}
-
-fsysdisable() {
-	local service=$(fsyslist -m)
-	[ -n "$service" ] && sudo systemctl disable "$service"
 }
 
 ## docker

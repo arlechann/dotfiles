@@ -2,7 +2,7 @@
 
 usage() {
 cat << EOF
-git-fbranch version 0.0.1
+git-fbranch version 0.0.2
 
 Print selected branch name(s).
 This command delegates arguments, except -h options, to fzf.
@@ -17,4 +17,4 @@ case "$1" in
 		;;
 esac
 
-git branch -va --color | fzf --height=100% --preview "git show --color {+1}" $@ | sed 's/^\*/ /' | awk '$0=$1'
+git branch -va --color | fzf --height=100% --preview 'git show --color {+1}' $@ | sed 's/^\*/ /' | awk '$0=$1'
