@@ -19,7 +19,7 @@ zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats "%F{red}[%b %a]%f"
 ## 本体
 setopt prompt_subst
-PROMPT="%F{$(if [ "$UID" = 0 ]; then echo 'red'; else echo 'cyan'; fi)}%n%f@%F{green}%m%f:%F{white}%~%f \${vcs_info_msg_0_}
+PROMPT="%F{cyan}%n%f@%F{green}%m%f:%F{white}%~%f \${vcs_info_msg_0_}
 %(?,%F{white},%F{red})%(!,#,$)%f "
 
 # 環境変数DISPLAYの設定
