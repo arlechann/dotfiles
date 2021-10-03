@@ -2,6 +2,7 @@
 
 SCRIPT_PATH=$(cd $(dirname $0); pwd)
 
+find "$SCRIPT_PATH/bash" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/$(basename $file)"; done
 find "$SCRIPT_PATH/zsh" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/$(basename $file)"; done
 find "$SCRIPT_PATH/vim" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/$(basename $file)"; done
 find "$SCRIPT_PATH/tmux" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/$(basename $file)"; done
