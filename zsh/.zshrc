@@ -69,6 +69,11 @@ if [ -e ${HOME}/.roswell ]; then
 	export PATH=${HOME}/.roswell/bin:$PATH
 fi
 
+# gaucheの設定
+if [ -e ${HOME}/.gauche ]; then
+	export PATH=${HOME}/.gauche/bin:$PATH
+fi
+
 # cargoの設定
 if [ -d ${HOME}/.cargo ]; then
 	source ${HOME}/.cargo/env

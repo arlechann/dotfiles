@@ -196,6 +196,24 @@ augroup vimrc-cpp
 	autocmd FileType cpp call s:cpp()
 augroup END
 
+" Scheme
+autocmd BufRead,BufNewfile *.scm setfiletype scheme
+
+function! s:scheme()
+	setlocal expandtab
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+	setlocal softtabstop=2
+	let lisp_rainbow = 1
+	let g:paredit_mode = 0
+	let g:paredit_electric_return = 0
+endfunction
+
+augroup vimrc-scheme
+	autocmd!
+	autocmd FileType scheme call s:scheme()
+augroup END
+
 " Common Lisp
 autocmd BufRead,BufNewfile *.lisp setfiletype lisp
 autocmd BufRead,BufNewfile *.asd setfiletype lisp
@@ -211,9 +229,6 @@ augroup vimrc-lisp
 	autocmd!
 	autocmd FileType lisp call s:lisp()
 augroup END
-
-" Scheme
-autocmd BufRead,BufNewfile *.scm setfiletype lisp
 
 " PHP
 function! s:php()
