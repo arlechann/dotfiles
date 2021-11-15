@@ -18,4 +18,4 @@ find "$SCRIPT_PATH/alacritty" -maxdepth 1 -type f | while read file; do ln -Ffs 
 unlink "$HOME/.vim"
 ln -s "$SCRIPT_PATH/vimfiles" "$HOME/.vim"
 
-[ -d "$SCRIPT_PATH/shellutils" ] || git clone https://github.com/arlechann/shellutils.git && "$SCRIPT_PATH/shellutils/install.sh"
+[ -d "$SCRIPT_PATH/shellutils" ] || git clone https://github.com/arlechann/shellutils.git && (cd $SCRIPT_PATH/shellutils; ./install.sh)
