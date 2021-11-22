@@ -20,6 +20,8 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 
 export LSCOLORS=ExFxCxdxBxegedabagacad
 
+export FZF_DEFAULT_OPTS='--ansi --border --reverse --height=80%'
+
 alias la='ls -Fa --color=always'
 alias ll='ls -Fl --color=always'
 alias lla='ls -Fla --color=always'
