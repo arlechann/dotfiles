@@ -41,7 +41,7 @@ bindsym mod1+F4 kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+	bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # change focus
 bindsym $mod+h focus left
@@ -210,6 +210,9 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 # print screen
 bindsym Print exec --no-startup-id import -window root ~/Pictures/screenshot/`date "+%y%m%d_%H%M%S"`.jpg
+
+# window switcher
+bindsym Ctrl+Mod1+Tab exec rofi -show window
 
 # startup apps
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b -o 1 -c -D 7 -f

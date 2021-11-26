@@ -26,3 +26,11 @@ alias la='ls -Fa --color=always'
 alias ll='ls -Fl --color=always'
 alias lla='ls -Fla --color=always'
 
+export FZF_DEFAULT_OPTS='--ansi --border --reverse --height=80%'
+
+# rbenv
+if [ -d ${HOME}/.rbenv ]; then
+	export PATH="$HOME/.rbenv/bin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+	eval "$(rbenv init -)"
+fi
+
