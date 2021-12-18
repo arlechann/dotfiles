@@ -30,7 +30,8 @@ font pango:IPAexGothic 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -68,10 +69,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+b split h
+bindsym $mod+b exec "i3-msg split h && notify-send -u low -t 1000 'split in horizontal orientation | '"
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+v exec "i3-msg split v && notify-send -u low -t 1000 'split in vertical orientation - '"
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -224,11 +225,21 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id dunst
 
 # set borders invisible
-for_window [class="^.*"] border pixel 0
+for_window [tiling] border none
+for_window [floating] border normal
 
 # application setting(float)
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [class="Google-chrome"] floating disable
+for_window [class="Vivaldi-stable"] floating disable
 for_window [class="Fcitx-config-gtk3"] floating enable, resize set 600 400
 for_window [class="Blueman-manager"] floating enable, resize set 600 400
+for_window [class="Nm-connection-editor"] floating enable, resize set 600 400
 
 # set wallpaper
 exec --no-startup-id "feh --bg-scale $HOME/.config/i3/wallpaper"
