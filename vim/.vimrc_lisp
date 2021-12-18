@@ -10,6 +10,7 @@ nnoremap <silent> ,ql :!qlot exec ros -e '(ql:quickload :swank) (swank:create-se
 
 " lisp一般
 setlocal expandtab
+set iskeyword+=*,+,.,:,/,-,!,?,<,>
 let lisp_rainbow = 1
 let g:paredit_mode = 0
 let g:paredit_electric_return = 0

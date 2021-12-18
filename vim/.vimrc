@@ -230,6 +230,24 @@ augroup vimrc-lisp
 	autocmd FileType lisp call s:lisp()
 augroup END
 
+" Scheme
+autocmd BufRead,BufNewfile *.scm setfiletype scheme
+
+function! s:scheme()
+	setlocal expandtab
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+	setlocal softtabstop=2
+	if filereadable(expand($HOME . '/.vimrc_lisp'))
+		source $HOME/.vimrc_lisp
+	endif
+endfunction
+
+augroup vimrc-scheme
+	autocmd!
+	autocmd FileType scheme call s:scheme()
+augroup END
+
 " PHP
 function! s:php()
 	setlocal expandtab
