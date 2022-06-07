@@ -283,7 +283,7 @@ endfunction
 
 augroup vimrc-html
 	autocmd!
-	autocmd FileType html,htmldjango call s:html()
+	autocmd FileType html,htmldjango,eruby call s:html()
 augroup END
 
 " css
@@ -310,6 +310,19 @@ endfunction
 augroup vimrc-markdown
 	autocmd!
 	autocmd FileType markdown call s:markdown()
+augroup END
+
+" Ruby
+function! s:ruby()
+	setlocal expandtab
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+	setlocal softtabstop=2
+endfunction
+
+augroup vimrc-ruby
+	autocmd!
+	autocmd FileType ruby call s:ruby()
 augroup END
 
 " yaml
