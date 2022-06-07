@@ -35,3 +35,9 @@ if [ -d ${HOME}/.rbenv ]; then
 	eval "$(rbenv init -)"
 fi
 
+# nvm
+if [ -e "${NVM_DIR:-$HOME/.nvm}/nvm.sh" ]; then
+	alias nvm='unalias nvm node npm && . "${NVM_DIR:-$HOME/.nvm}"/nvm.sh && nvm'
+	alias node='unalias nvm node npm && . "${NVM_DIR:-$HOME/.nvm}"/nvm.sh && node'
+	alias npm='unalias nvm node npm && . "${NVM_DIR:-$HOME/.nvm}"/nvm.sh && npm'
+fi
