@@ -31,8 +31,9 @@ export FZF_DEFAULT_OPTS='--ansi --border --reverse --height=80%'
 
 # rbenv
 if [ -d ${HOME}/.rbenv ]; then
-	export PATH="$HOME/.rbenv/bin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+	export PATH="$PATH:$HOME/.rbenv/bin"
 	eval "$(rbenv init -)"
+	export PATH="$PATH:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin"
 fi
 
 # nvm
@@ -41,3 +42,4 @@ if [ -e "${NVM_DIR:-$HOME/.nvm}/nvm.sh" ]; then
 	alias node='unalias nvm node npm && . "${NVM_DIR:-$HOME/.nvm}"/nvm.sh && node'
 	alias npm='unalias nvm node npm && . "${NVM_DIR:-$HOME/.nvm}"/nvm.sh && npm'
 fi
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
