@@ -299,6 +299,19 @@ augroup vimrc-css
 	autocmd FileType css call s:css()
 augroup END
 
+" JavaScript
+function! s:js()
+	setlocal expandtab
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+	setlocal softtabstop=2
+endfunction
+
+augroup vimrc-js
+	autocmd!
+	autocmd FileType javascript call s:js()
+augroup END
+
 " Markdown
 function! s:markdown()
 	setlocal expandtab
