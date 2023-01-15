@@ -23,6 +23,7 @@ export LSCOLORS=ExFxCxdxBxegedabagacad
 export FZF_DEFAULT_OPTS='--ansi --border --reverse --height=80%'
 export GAUCHE_READ_EDIT=''
 
+alias ls='ls --color=auto'
 alias la='ls -Fa --color=always'
 alias ll='ls -Fl --color=always'
 alias lla='ls -Fla --color=always'
