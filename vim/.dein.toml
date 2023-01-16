@@ -18,8 +18,12 @@ depends = ['prabirshrestha/vim-lsp', 'prabirshrestha/asyncomplete-lsp.vim']
 [[plugins]]
 repo = 'vim-airline/vim-airline'
 hook_add = '''
+	" theme
+	let g:airline_theme='lucius'
+	let g:airline_powerline_fonts=0
+
 	" tabline
-	let g:airline#extensions#tabline#enabled = 1
+	let g:airline#extensions#tabline#enabled=1
 '''
 
 [[plugins]]
