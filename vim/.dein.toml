@@ -1,2 +1,27 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+depends = ['vim-lsp']
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+depends = ['prabirshrestha/vim-lsp', 'prabirshrestha/asyncomplete-lsp.vim']
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+	" tabline
+	let g:airline#extensions#tabline#enabled = 1
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+depends = ['vim-airline']

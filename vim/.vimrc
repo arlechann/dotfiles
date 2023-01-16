@@ -63,11 +63,7 @@ au BufNewFile,BufRead * set iminsert=0
 " -----画面表示の設定-----
 syntax enable		" シンタックスを有効化
 set number			" 行番号を表示する
-
-if version > 702	" Vim7.2より古ければ読まない
-	set relativenumber	" 相対行番号表示
-endif
-
+set relativenumber	" 相対行番号表示
 set ruler			" 座標を表示する
 set cursorline		" カーソル行の背景色を変える
 set nocursorcolumn	"カーソル位置のカラムの背景色を変えない
@@ -104,9 +100,7 @@ nnoremap k gk
 nnoremap <down> gj
 nnoremap <up> gk
 " 絶対行と相対行の切り替え
-"if version > 702	" Vim7.2より古ければ読まない
-"	nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
-"endif
+nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 
 " 挿入モードのキーバインド
 " 挿入モード中に'Ctr-*'でコマンドモードでの移動を可能にする
@@ -118,6 +112,10 @@ inoremap <C-h> <left>
 inoremap <C-k> <up>
 " 下移動
 inoremap <C-j> <down>
+
+" buffer移動
+nmap <C-n> :bn<CR>
+nmap <C-p> :bp<CR>
 
 " -----ファイル処理関連の設定-----
 set confirm			" 保存されていないファイルがあるときは終了前に保存確認
@@ -143,6 +141,13 @@ set shiftwidth=4	" 自動インデントでずれる幅
 set softtabstop=4	" 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 set autoindent		" 改行時に前の行のインデントを継続する
 set smartindent		" 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+
+" -----netrwの設定-----
+let g:netrw_liststyle=1 " 表示形式
+let g:netrw_timefmt="%Y-%m-%d %H:%M:%S" " 日時形式
+let g:netrw_banner=0 " ヘッダ表示
+let g:netrw_sizestyle="H" " ファイルサイズ表示
+let g:netrw_preview=1 " プレビューウィンドウを垂直分割で表示
 
 " -----動作環境と統合関連の設定-----
 " OSのクリップボードをレジスタ指定無しで Yank, Put 出来るようにする
