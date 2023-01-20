@@ -73,8 +73,9 @@ set statusline=%<%f\ %y%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}\ %r%h%w\ %m\ %
 "set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P\ 
 set cmdheight=1		" メッセージ表示欄を1行確保
 set showcmd			" 入力中のコマンドを表示する
-set showmatch		" 対応する括弧を強調表示
-set matchtime=3		" showmatchの表示時間(s)
+"set showmatch		" 対応する括弧を強調表示
+let loaded_matchparen=1	" 対応する括弧の強調表示を解除
+"set matchtime=3		" showmatchの表示時間(s)
 "set helpheight=999 " ヘルプを画面いっぱいに開く
 set list			" 不可視文字を表示
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮	" 不可視文字の表示記号指定
@@ -304,7 +305,7 @@ augroup vimrc-css
 	autocmd FileType css call s:css()
 augroup END
 
-" JavaScript
+" JavaScript/TypeScript
 function! s:js()
 	setlocal expandtab
 	setlocal tabstop=2
@@ -314,7 +315,7 @@ endfunction
 
 augroup vimrc-js
 	autocmd!
-	autocmd FileType javascript call s:js()
+	autocmd FileType javascript,typescript call s:js()
 augroup END
 
 " Markdown
