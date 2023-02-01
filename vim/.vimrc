@@ -143,6 +143,12 @@ set softtabstop=4	" 連続した空白に対してタブキーやバックスペ
 set autoindent		" 改行時に前の行のインデントを継続する
 set smartindent		" 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 
+" -----オムニ補完設定-----
+set completeopt=menuone,noinsert
+inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
+inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
+inoremap <expr><Tab> pumvisible() ? "<C-y>" : "<Tab>"
+
 " -----netrwの設定-----
 let g:netrw_liststyle=1 " 表示形式
 let g:netrw_timefmt="%Y-%m-%d %H:%M:%S" " 日時形式
