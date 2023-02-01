@@ -11,6 +11,7 @@ PS1='\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h\[\e[m\]:\w
 $ '
 
 export PATH=$PATH:~/bin
+export PROMPT_COMMAND='history -a'
 export EDITOR=vim
 export VISUAL=vim
 
