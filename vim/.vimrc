@@ -63,7 +63,7 @@ au BufNewFile,BufRead * set iminsert=0
 " -----画面表示の設定-----
 syntax enable		" シンタックスを有効化
 set number			" 行番号を表示する
-set relativenumber	" 相対行番号表示
+"set relativenumber	" 相対行番号表示
 set ruler			" 座標を表示する
 set cursorline		" カーソル行の背景色を変える
 set nocursorcolumn	"カーソル位置のカラムの背景色を変えない
@@ -321,7 +321,7 @@ endfunction
 
 augroup vimrc-js
 	autocmd!
-	autocmd FileType javascript,typescript call s:js()
+	autocmd FileType javascript,javascriptreact,typescript call s:js()
 augroup END
 
 " Markdown
