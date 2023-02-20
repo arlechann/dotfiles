@@ -46,6 +46,11 @@ if [ -e "${NVM_DIR:-$HOME/.nvm}/nvm.sh" ]; then
 fi
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# cargo
+if [ -e ${HOME}/.cargo/env ]; then
+	source ${HOME}/.cargo/env
+fi
+
 # Starship
 if which starship > /dev/null 2>&1; then
 	eval "$(starship init bash)"
