@@ -350,6 +350,22 @@ augroup vimrc-ruby
 	autocmd FileType ruby call s:ruby()
 augroup END
 
+" Rust
+function! s:rust()
+	setlocal expandtab
+	setlocal tabstop=4
+	setlocal shiftwidth=4
+	setlocal softtabstop=4
+
+	" rustfmt
+	nnoremap = :silent %!rustfmt --quiet --emit stdout %<CR>
+endfunction
+
+augroup vimrc-rust
+	autocmd!
+	autocmd FileType rust call s:rust()
+augroup END
+
 " yaml
 function! s:yaml()
 	setlocal expandtab
