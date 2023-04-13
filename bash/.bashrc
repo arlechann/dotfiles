@@ -28,8 +28,13 @@ alias ls='ls --color=auto'
 alias la='ls -Fa --color=always'
 alias ll='ls -Fl --color=always'
 alias lla='ls -Fla --color=always'
+alias emacs='emacs -nw'
 
+# fzf
 export FZF_DEFAULT_OPTS='--ansi --border --reverse --height=80%'
+if [ -e /usr/share/doc/fzf/examples/key-bindings.bash ]; then
+	source /usr/share/doc/fzf/examples/key-bindings.bash
+fi
 
 # rbenv
 if [ -d ${HOME}/.rbenv ]; then
