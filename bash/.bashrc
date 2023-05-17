@@ -35,6 +35,10 @@ export FZF_DEFAULT_OPTS='--ansi --border --reverse --height=80%'
 if [ -e /usr/share/doc/fzf/examples/key-bindings.bash ]; then
 	source /usr/share/doc/fzf/examples/key-bindings.bash
 fi
+if [ -e /usr/share/fzf/key-bindings.bash ] && [ -e /usr/share/fzf/completion.bash ]; then
+	source /usr/share/fzf/key-bindings.bash
+	source /usr/share/fzf/completion.bash
+fi
 
 # rbenv
 if [ -d ${HOME}/.rbenv ]; then
