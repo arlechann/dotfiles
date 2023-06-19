@@ -15,6 +15,7 @@ mkdir -p "$HOME/.config/i3blocks"
 find "$SCRIPT_PATH/i3blocks" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/.config/i3blocks/$(basename $file)"; done
 mkdir -p "$HOME/.config/alacritty"
 find "$SCRIPT_PATH/alacritty" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/.config/alacritty/$(basename $file)"; done
+[ -d "$HOME/.config/alacritty/themes" ] || git clone https://github.com/alacritty/alacritty-theme "$HOME/.config/alacritty/themes"
 
 unlink "$HOME/.vim"
 ln -s "$SCRIPT_PATH/vimfiles" "$HOME/.vim"

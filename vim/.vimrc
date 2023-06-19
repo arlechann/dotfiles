@@ -43,7 +43,7 @@ set t_Co=256
 set nocompatible
 
 " カラースキーマの設定
-colorscheme desert
+"colorscheme desert
 
 " 文字コード
 if has("unix") || has("win32unix")
@@ -158,7 +158,8 @@ let g:netrw_preview=1 " プレビューウィンドウを垂直分割で表示
 
 " -----動作環境と統合関連の設定-----
 " OSのクリップボードをレジスタ指定無しで Yank, Put 出来るようにする
-set clipboard=unnamed,unnamedplus
+"set clipboard=unnamed,unnamedplus
+set clipboard=unnamedplus
 " マウスの入力を受け付ける
 set mouse=a
 " Windows でもパスの区切り文字を / にする
@@ -208,24 +209,6 @@ augroup vimrc-cpp
 	autocmd FileType cpp call s:cpp()
 augroup END
 
-" Scheme
-autocmd BufRead,BufNewfile *.scm setfiletype scheme
-
-function! s:scheme()
-	setlocal expandtab
-	setlocal tabstop=2
-	setlocal shiftwidth=2
-	setlocal softtabstop=2
-	let lisp_rainbow = 1
-	let g:paredit_mode = 0
-	let g:paredit_electric_return = 0
-endfunction
-
-augroup vimrc-scheme
-	autocmd!
-	autocmd FileType scheme call s:scheme()
-augroup END
-
 " Common Lisp
 autocmd BufRead,BufNewfile *.lisp setfiletype lisp
 autocmd BufRead,BufNewfile *.asd setfiletype lisp
@@ -253,6 +236,12 @@ function! s:scheme()
 	if filereadable(expand($HOME . '/.vimrc_lisp'))
 		source $HOME/.vimrc_lisp
 	endif
+	let lisp_rainbow = 1
+	let g:paredit_mode = 0
+	let g:paredit_electric_return = 0
+
+	" frazrepo/vim-rainbow
+	call rainbow#load()
 endfunction
 
 augroup vimrc-scheme

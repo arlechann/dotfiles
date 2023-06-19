@@ -1,6 +1,6 @@
 " -----GVimの設定-----
 " 色テーマの設定
-colorscheme desert
+"colorscheme desert
 
 " フォントとフォントサイズの設定
 set guifont=Ricty\ 14

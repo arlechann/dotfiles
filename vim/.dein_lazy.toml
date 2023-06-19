@@ -3,6 +3,10 @@ repo = 'kovisoft/slimv'
 on_ft = ['lisp']
 
 [[plugins]]
+repo = 'frazrepo/vim-rainbow'
+on_ft = ['lisp', 'scheme', 'clojure']
+
+[[plugins]]
 repo = 'prettier/vim-prettier'
 build = 'npm install'
 on_ft = ['javascript', 'typescript', 'json']
