@@ -2,6 +2,15 @@
 repo = 'kovisoft/slimv'
 on_ft = ['lisp']
 
+#[[plugins]]
+#repo = 'vlime/vlime'
+#rtp = 'vim/'
+#on_ft = ['lisp']
+
+#[[plugins]]
+#repo = 'kovisoft/paredit'
+#on_ft = ['lisp']
+
 [[plugins]]
 repo = 'frazrepo/vim-rainbow'
 on_ft = ['lisp', 'scheme', 'clojure']

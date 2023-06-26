@@ -1,3 +1,6 @@
+" Pre
+filetype off
+
 " -----Plugin-----
 " プラグインを読み込む場合はここに記述する
 " Plugin Maneger dein.vim
@@ -101,7 +104,7 @@ nnoremap k gk
 nnoremap <down> gj
 nnoremap <up> gk
 " 絶対行と相対行の切り替え
-nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
+"nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 
 " 挿入モードのキーバインド
 " 挿入モード中に'Ctr-*'でコマンドモードでの移動を可能にする
@@ -183,18 +186,19 @@ set display+=lastline	" 最後の行を出来る限り表示する
 
 " ノーマルモードでIMEをオフにする
 if has("unix")
-	function! Fcitx2en()
-		let s:input_status = system("fcitx-remote")
+	function! s:disableFcitx5()
+		let s:input_status = system("fcitx5-remote")
 		if s:input_status == 2
-			let l:a = system("fcitx-remote -c")
+			let l:a = system("fcitx5-remote -c")
 		endif
 	endfunction
-	autocmd InsertLeave * call Fcitx2en()
+	autocmd InsertLeave * call s:disableFcitx5()
 elseif has("win32") || has("win64")
 endif
 
 " -----filetypeごとの設定-----
-"filetype plugin indent on
+filetype plugin on
+"
 " C++
 function! s:cpp()
 	if filereadable(expand($HOME . '/.vimrc_local_cpp'))
@@ -218,6 +222,9 @@ function! s:lisp()
 	if filereadable(expand($HOME . '/.vimrc_lisp'))
 		source $HOME/.vimrc_lisp
 	endif
+
+	" frazrepo/vim-rainbow
+	call rainbow#load()
 endfunction
 
 augroup vimrc-lisp
@@ -229,16 +236,9 @@ augroup END
 autocmd BufRead,BufNewfile *.scm setfiletype scheme
 
 function! s:scheme()
-	setlocal expandtab
-	setlocal tabstop=2
-	setlocal shiftwidth=2
-	setlocal softtabstop=2
 	if filereadable(expand($HOME . '/.vimrc_lisp'))
 		source $HOME/.vimrc_lisp
 	endif
-	let lisp_rainbow = 1
-	let g:paredit_mode = 0
-	let g:paredit_electric_return = 0
 
 	" frazrepo/vim-rainbow
 	call rainbow#load()
