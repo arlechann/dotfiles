@@ -48,12 +48,14 @@ if [ -d ${HOME}/.rbenv ]; then
 fi
 
 # nvm
-if [ -e "${NVM_DIR:-$HOME/.nvm}/nvm.sh" ]; then
-	alias nvm='unalias nvm node npm && . "${NVM_DIR:-$HOME/.nvm}"/nvm.sh && nvm'
-	alias node='unalias nvm node npm && . "${NVM_DIR:-$HOME/.nvm}"/nvm.sh && node'
-	alias npm='unalias nvm node npm && . "${NVM_DIR:-$HOME/.nvm}"/nvm.sh && npm'
+[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
+[ -d "/usr/share/nvm" ] && nvm_init_dir="/usr/share/nvm" || nvm_init_dir="${NVM_DIR}"
+if [ -d "${nvm_init_dir}" ]; then
+	alias nvm='unalias nvm node npm npx && source "${nvm_init_dir}/nvm.sh" && source "${nvm_init_dir}/bash_completion" && nvm'
+	alias node='unalias nvm node npm npx && source "${nvm_init_dir}/nvm.sh" && source "${nvm_init_dir}/bash_completion" && node'
+	alias npm='unalias nvm node npm npx && source "${nvm_init_dir}/nvm.sh" && source "${nvm_init_dir}/bash_completion" && npm'
+	alias npx='unalias nvm node npm npx && source "${nvm_init_dir}/nvm.sh" && source "${nvm_init_dir}/bash_completion" && npx'
 fi
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # cargo
 if [ -e ${HOME}/.cargo/env ]; then
