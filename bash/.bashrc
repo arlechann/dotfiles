@@ -58,12 +58,10 @@ if [ -d "${nvm_init_dir}" ]; then
 fi
 
 # cargo
-if [ -e ${HOME}/.cargo/env ]; then
-	source ${HOME}/.cargo/env
-fi
+[ -e ${HOME}/.cargo/env ] && source ${HOME}/.cargo/env
 
 # roswell
-if [ -d ${HOME}/.roswell/bin ]; then
+if [ -d ${HOME}/.roswell ]; then
 	export PATH=$PATH:$HOME/.roswell/bin
 fi
 
@@ -71,4 +69,3 @@ fi
 if which starship > /dev/null 2>&1; then
 	eval "$(starship init bash)"
 fi
-. "$HOME/.cargo/env"
