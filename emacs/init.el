@@ -15,5 +15,7 @@
 (add-to-list 'auto-mode-alist '("\\.lsp$" . lisp-mode))
 (add-to-list 'auto-mode-alist '("\\.lisp$" . lisp-mode))
 
-(load (expand-file-name "~/.roswell/helper.el"))
+(let ((slime-helper "~/.roswell/helper.el"))
+  (if (file-exists-p slime-helper)
+      (load (expand-file-name "~/.roswell/helper.el"))))
 (setq inferior-lisp-program "ros -Q run")

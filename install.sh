@@ -20,6 +20,10 @@ find "$SCRIPT_PATH/alacritty" -maxdepth 1 -type f | while read file; do ln -Ffs 
 unlink "$HOME/.vim"
 ln -s "$SCRIPT_PATH/vimfiles" "$HOME/.vim"
 
+unlink "$HOME/.emacs.d"
 ln -s "$SCRIPT_PATH/emacs" "$HOME/.emacs.d"
+
+unlink "$HOME/.lem"
+ln -s "$SCRIPT_PATH/lem" "$HOME/.lem"
 
 [ -d "$SCRIPT_PATH/shellutils" ] || git clone https://github.com/arlechann/shellutils.git && (cd $SCRIPT_PATH/shellutils; ./install.sh)

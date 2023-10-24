@@ -62,6 +62,11 @@ if [ -e ${HOME}/.cargo/env ]; then
 	source ${HOME}/.cargo/env
 fi
 
+# roswell
+if [ -d ${HOME}/.roswell/bin ]; then
+	export PATH=$PATH:$HOME/.roswell/bin
+fi
+
 # Starship
 if which starship > /dev/null 2>&1; then
 	eval "$(starship init bash)"
