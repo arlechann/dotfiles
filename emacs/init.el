@@ -21,11 +21,18 @@
     ;; initialize leaf-keywords.el
     (leaf-keywords-init)))
 
+;; install packages
+(leaf solarized-theme
+  :ensure t
+  :config ;(load-theme 'solarized-dark t))
+
 ;; launguage
 (set-language-environment 'Japanese)
 (set-language-environment 'utf-8)
 (prefer-coding-system 'utf-8)
 
+(setq make-backup-files nil) ; no backup files
+(setq auto-save-default nil) ; no auto save files
 (global-display-line-numbers-mode) ; show line number
 (show-paren-mode 1) ; hilight match parenthesis
 (setq scroll-conservatively 1) ; scroll a line
@@ -43,3 +50,15 @@
       (load (expand-file-name slime-helper))))
 (setq inferior-lisp-program "ros -Q run")
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(blackout el-get hydra leaf-keywords leaf)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
