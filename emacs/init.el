@@ -51,6 +51,7 @@
            (make-backup-files . nil)
            (auto-save-default . nil) ; no auto save
            (transient-mark-mode . t) ; show mark
+           (native-comp-async-report-warnings-errors . nil) ; supress warnings on gcc emacs
            ))
 
 (leaf key-binds
@@ -69,6 +70,7 @@
 
 (leaf solarized-theme
   :ensure t
+  :when window-system
   :config (load-theme 'solarized-dark t))
 
 (leaf company

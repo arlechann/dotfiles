@@ -1,4 +1,6 @@
+custom.el
 /auto-save-list
+/eln-cache
 /elpa
 /el-get
 /url
