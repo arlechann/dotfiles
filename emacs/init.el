@@ -107,4 +107,12 @@
         :when (file-exists-p roswell-helper-path)
         :init (load (expand-file-name roswell-helper-path))
         :custom ((inferior-lisp-program . "ros -Q run"))))))
-  
+
+(defun my/move-beginning-of-line (&optional position)
+  (interactive)
+  (let ((position (or position (point)))
+        (beginning-of-code (progn (back-to-indentation) (point))))
+    (if (eql position beginning-of-code)
+        (move-beginning-of-line 1))))
+
+(global-set-key "\C-a" 'my/move-beginning-of-line)
