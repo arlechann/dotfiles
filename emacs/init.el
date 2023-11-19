@@ -94,8 +94,8 @@
 
 (leaf lisp-mode*
   :config
-  (add-to-list 'auto-mode-alist '("\\.lsp$" . lisp-mode))
-  (add-to-list 'auto-mode-alist '("\\.lisp$" . lisp-mode)) 
+  (add-to-list 'auto-mode-alist '("\\.lsp\\'" . lisp-mode))
+  (add-to-list 'auto-mode-alist '("\\.lisp\\'" . lisp-mode))
   (let ((roswell-helper-path "~/.roswell/helper.el"))
     (leaf slime*
       :config
@@ -108,6 +108,23 @@
         :init (load (expand-file-name roswell-helper-path))
         :custom ((inferior-lisp-program . "ros -Q run"))))))
 
+;; (leaf web-mode
+;;   :ensure t
+;;   :mode (("\\.html\\'" . web-mode)
+;;          ("\\.css\\'" . web-mode)
+;;          ("\\.[jt]sx?\\'" . web-mode))
+;;   :custom ((web-mode-enable-auto-paring . t)
+;;            (web-mode-enable-css-colorization . t)
+;;            (web-mode-enable-current-element-highlight . t)
+;;            (web-mode-enable-current-column-highlight . t))
+;;   :hook ((local-write-file-hooks . (lambda () (delete-trailing-whitespace) nil))))
+
+;; (leaf lsp-mode
+;;   :if nil
+;;   :ensure t
+;;   :config (lsp lsp-deferred)
+;;   :hook ((web-mode . #'lsp)))
+
 (defun my/move-beginning-of-line (&optional position)
   (interactive)
   (let ((position (or position (point)))
@@ -116,3 +133,4 @@
         (move-beginning-of-line 1))))
 
 (global-set-key "\C-a" 'my/move-beginning-of-line)
+
