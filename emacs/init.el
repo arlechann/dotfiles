@@ -32,27 +32,27 @@
 
 (leaf custom-set-value
   :preface (defun c/redraw-frame ()
-	     (interactive)
-	     (redraw-frame))
+       (interactive)
+       (redraw-frame))
   :bind (("M-ESC ESC" . c/redraw-frame))
   :custom ((create-lockfiles . nil)
-	   (frame-resize-pixelwise . t)
-	   (enable-recursive-minibuffers . t)
-	   (history-length . 1000)
-	   (history-delete-duplicates . t)
-	   (scroll-preserve-screen-position . nil)
-	   (scroll-conservatively . 1) ; scroll a line
-	   (mouse-wheel-scroll-amount . '(1 ((control) . 5)))
-	   (ring-bell-funcation . 'ignore) ; no bell
-	   (menu-bar-mode . t) ; show menu bar on gui
-	   (tool-bar-mode . nil) ; hide tool bar on gui
-	   (scroll-bar-mode . t) ; use scroll bar on gui
-	   (indent-tabs-mode . nil) ; use spaces for indent
-           (make-backup-files . nil)
-           (auto-save-default . nil) ; no auto save
-           (transient-mark-mode . t) ; show mark
-           (native-comp-async-report-warnings-errors . nil) ; supress warnings on gcc emacs
-           ))
+     (frame-resize-pixelwise . t)
+     (enable-recursive-minibuffers . t)
+     (history-length . 1000)
+     (history-delete-duplicates . t)
+     (scroll-preserve-screen-position . nil)
+     (scroll-conservatively . 1) ; scroll a line
+     (mouse-wheel-scroll-amount . '(1 ((control) . 5)))
+     (ring-bell-funcation . 'ignore) ; no bell
+     (menu-bar-mode . t) ; show menu bar on gui
+     (tool-bar-mode . nil) ; hide tool bar on gui
+     (scroll-bar-mode . t) ; use scroll bar on gui
+     (indent-tabs-mode . nil) ; use spaces for indent
+     (make-backup-files . nil)
+     (auto-save-default . nil) ; no auto save
+     (transient-mark-mode . t) ; show mark
+     (native-comp-async-report-warnings-errors . nil) ; supress warnings on gcc emacs
+     ))
 
 (leaf key-binds
   :config (keyboard-translate ?\C-h ?\C-?)) ; use C-h as backspace
@@ -66,7 +66,7 @@
 (leaf font-setting
   :config (setq default-frame-alist
                 (append (list '(font . "HackGen Console NF-11")
-        	              default-frame-alist))))
+                        default-frame-alist))))
 
 (leaf solarized-theme
   :ensure t
@@ -78,18 +78,18 @@
   :blackout t
   :leaf-defer nil
   :bind ((company-active-map
-	  ("M-n" . nil)
-	  ("M-p" . nil)
-	  ("C-s" . company-filter-candidates)
-	  ("C-n" . company-select-next)
-	  ("C-p" . company-select-previous)
-	  ("<tab>" . company-complete-selection))
-	 (company-search-map
-	  ("C-n" . company-select-next)
-	  ("C-p" . company-select-previous)))
+    ("M-n" . nil)
+    ("M-p" . nil)
+    ("C-s" . company-filter-candidates)
+    ("C-n" . company-select-next)
+    ("C-p" . company-select-previous)
+    ("<tab>" . company-complete-selection))
+   (company-search-map
+    ("C-n" . company-select-next)
+    ("C-p" . company-select-previous)))
   :custom ((company-idle-delay . 0)
-	   (company-minimux-prefix-length . 1)
-	   (company-transformers . '(company-sort-by-occurrence)))
+     (company-minimux-prefix-length . 1)
+     (company-transformers . '(company-sort-by-occurrence)))
   :global-minor-mode global-company-mode)
 
 (leaf lisp-mode*
@@ -107,6 +107,9 @@
         :when (file-exists-p roswell-helper-path)
         :init (load (expand-file-name roswell-helper-path))
         :custom ((inferior-lisp-program . "ros -Q run"))))))
+
+(leaf scheme-mode*
+  :config (setq scheme-program-name "gosh -i"))
 
 ;; (leaf web-mode
 ;;   :ensure t
