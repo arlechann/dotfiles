@@ -136,7 +136,7 @@
         :custom ((inferior-lisp-program . "ros -Q run"))))))
 
 (leaf scheme-mode*
-  :config (setq scheme-program-name "gosh -i"))
+  :custom '((scheme-program-name . "gosh -i")))
 
 ;; (leaf web-mode
 ;;   :ensure t
