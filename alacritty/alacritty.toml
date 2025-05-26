@@ -1,0 +1,27 @@
+
+[cursor.style]
+shape = "Block"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 14
+
+[font.bold]
+family = "HackGen Console NFJ"
+style = "Bold"
+
+[font.normal]
+family = "HackGen Console NFJ"
+style = "Regular"
+
+[window]
+opacity = 0.9
+
+[window.padding]
+x = 2
+y = 0
+
+[general]
+import = ["/home/aijus/.config/alacritty/themes/themes/iterm.yaml"]
