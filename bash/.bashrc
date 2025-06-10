@@ -28,7 +28,7 @@ alias ls='ls --color=auto'
 alias la='ls -Fa --color=always'
 alias ll='ls -Fl --color=always'
 alias lla='ls -Fla --color=always'
-alias emacs='emacs -nw'
+#alias emacs='emacs -nw'
 
 # fzf
 export FZF_DEFAULT_OPTS='--ansi --border --reverse --height=80%'
