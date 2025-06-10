@@ -48,6 +48,8 @@ set nocompatible
 " カラースキーマの設定
 "colorscheme desert
 
+" set termguicolors
+
 " 文字コード
 if has("unix") || has("win32unix")
 	set encoding=utf-8
