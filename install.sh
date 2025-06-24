@@ -9,6 +9,7 @@ find "$SCRIPT_PATH/tmux" -maxdepth 1 -type f | while read file; do ln -Ffs "$fil
 
 #find "$SCRIPT_PATH/xwindow" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/$(basename $file)"; done
 #find "$SCRIPT_PATH/readline" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/$(basename $file)"; done
+find "$SCRIPT_PATH/lisp" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/$(basename $file)"; done
 #mkdir -p "$HOME/.config/i3"
 #find "$SCRIPT_PATH/i3" -maxdepth 1 -type f | while read file; do ln -Ffs "$file" "$HOME/.config/i3/$(basename $file)"; done
 #mkdir -p "$HOME/.config/i3blocks"

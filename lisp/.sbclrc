@@ -1,0 +1,29 @@
+; -*-mode: Lisp;-*-
+
+;; prompt
+#+sbcl
+(setf sb-int:*repl-prompt-fun*
+      (let ((last-package nil)
+            (cached-prompt nil))
+        #'(lambda (stream)
+            (unless (eq last-package *package*)
+              (setf cached-prompt (concatenate 'string
+                                               (or (first (package-nicknames *package*))
+                                                   (package-name *package*))
+                                               "> ")
+                    last-package *package*))
+            (terpri)
+            (princ cached-prompt stream))))
+
+;; encoding
+#+sbcl
+(setf sb-impl::*default-external-format* :utf-8
+      sb-alien::*default-c-string-external-format* :utf-8)
+
+;; quicklisp
+#-quicklisp
+(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
+                                       (user-homedir-pathname))))
+  (when (probe-file quicklisp-init)
+    (load quicklisp-init)))
+
