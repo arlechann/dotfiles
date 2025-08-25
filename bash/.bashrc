@@ -7,10 +7,12 @@
 
 shopt -s checkwinsize
 
+bind -s 'set completion-ignore-case on'
+
 PS1='\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h\[\e[m\]:\w
 $ '
 
-export PATH=$PATH:~/bin
+export PATH=${HOME}/bin:${PATH}
 export PROMPT_COMMAND='history -a'
 export EDITOR=vim
 export VISUAL=vim
@@ -42,13 +44,13 @@ fi
 
 # rbenv
 if [ -d ${HOME}/.rbenv ]; then
-	export PATH="$PATH:$HOME/.rbenv/bin"
+	export PATH=${HOME}/.rbenv/bin:${PATH}
 	eval "$(rbenv init -)"
-	export PATH="$PATH:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin"
+	export PATH=$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:${PATH}
 fi
 
 # nvm
-[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
+[ -z "${NVM_DIR}" ] && export NVM_DIR="${HOME}/.nvm"
 [ -d "/usr/share/nvm" ] && nvm_init_dir="/usr/share/nvm" || nvm_init_dir="${NVM_DIR}"
 if [ -d "${nvm_init_dir}" ]; then
 	alias nvm='unalias nvm node npm npx && source "${nvm_init_dir}/nvm.sh" && source "${nvm_init_dir}/bash_completion" && nvm'
@@ -62,7 +64,15 @@ fi
 
 # roswell
 if [ -d ${HOME}/.roswell ]; then
-	export PATH=$PATH:$HOME/.roswell/bin
+	export PATH=${HOME}/.roswell/bin:${PATH}
+fi
+
+# ghcup
+if [ -d ${HOME}/.ghcup ]; then
+	export PATH=${HOME}/.ghcup/bin:${PATH}
+	if [ -d ${HOME}/.cabal ]; then
+		export PATH=${HOME}/.cabal/bin:${PATH}
+	fi
 fi
 
 # Starship
