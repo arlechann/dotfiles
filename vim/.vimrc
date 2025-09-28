@@ -46,9 +46,9 @@ set t_Co=256
 set nocompatible
 
 " カラースキーマの設定
-"colorscheme desert
+colorscheme desert
 
-" set termguicolors
+set termguicolors
 
 " 文字コード
 if has("unix") || has("win32unix")
@@ -355,6 +355,19 @@ endfunction
 augroup vimrc-rust
 	autocmd!
 	autocmd FileType rust call s:rust()
+augroup END
+
+" haskell
+function! s:haskell()
+	setlocal expandtab
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+	setlocal softtabstop=2
+endfunction
+
+augroup vimrc-haskell
+	autocmd!
+	autocmd FileType haskell call s:haskell()
 augroup END
 
 " yaml
