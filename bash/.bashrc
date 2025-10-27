@@ -14,6 +14,7 @@ alias la='ls -Fa --color=always'
 alias ll='ls -Fl --color=always'
 alias lla='ls -Fla --color=always'
 #alias emacs='emacs -nw'
+alias tmux='tmux -u'
 
 # gauche
 export GAUCHE_READ_EDIT=''
