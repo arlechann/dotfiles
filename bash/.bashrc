@@ -94,6 +94,13 @@ if [ -d "${nvm_init_dir}" ]; then
 	alias npx='unalias nvm node npm npx && source "${nvm_init_dir}/nvm.sh" && source "${nvm_init_dir}/bash_completion" && npx'
 fi
 
+# fnm
+FNM_PATH="${HOME}/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "$(fnm env)"
+fi
+
 # pyenv
 if [ -d "${HOME}/.pyenv" ] && [ -d "${PYENV_ROOT}/bin" ]; then
 	eval "$(register-python-argcomplete pipx)"
