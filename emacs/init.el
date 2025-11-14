@@ -79,19 +79,19 @@
   :config
   (leaf doom-themes
     :ensure t
-    :custom '((doom-themes-enable-bold . t)
-              (doom-themes-enable-italic . t))
+    :custom ((doom-themes-enable-bold . t)
+             (doom-themes-enable-italic . t))
     :config
     (load-theme 'doom-dracula t)
     (doom-themes-visual-bell-config)
     (doom-themes-neotree-config)
     (doom-themes-org-config))
   (leaf doom-modeline
-    :custom '((doom-modeline-buffer-file-name-style . 'truncate-with-project)
-              (doom-modeline-icon . t)
-              (doom-modeline-major-mode-icon . nil)
-              (doom-modeline-minor-modes . nil))
-    :hook '((after-init . doom-modeline-mode))
+    :custom ((doom-modeline-buffer-file-name-style . 'truncate-with-project)
+             (doom-modeline-icon . t)
+             (doom-modeline-major-mode-icon . nil)
+             (doom-modeline-minor-modes . nil))
+    :hook ((after-init . doom-modeline-mode))
     :config
     (line-number-mode 0)
     (column-number-mode 0)
@@ -99,6 +99,25 @@
      'main
      '(bar workspace-number window-number evil-state god-state ryo-modal xah-fly-keys matches buffer-info remote-host buffer-position parrot selection-info)
      '(misc-info persp-name lsp github debug minor-modes input-method major-mode process vcs checker))))
+
+(leaf shell
+  :when (eq system-type 'windows-nt)
+  :custom ((explicit-shell-file-name . "wsl.exe")
+           (shell-file-name . "wsl.exe"))
+  :hook ((shell-mode-hook . (lambda ()
+                              (set-buffer-file-coding-system 'unix)
+                              (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
+  :config
+  (setenv "SHELL" shell-file-name)
+  (defvar explicit-wsl.exe-args nil)
+  (defvar my/original-shell-command (symbol-function 'shell))
+  (defun my/shell-wsl (&optional buffer)
+    (interactive)
+    (let ((explicit-wsl.exe-args
+           (list "--cd" (expand-file-name default-directory) "bash" "-i")))
+      (funcall-interactively my/original-shell-command
+                             (or buffer "*wsl-shell*"))))
+  (defalias 'shell #'my/shell-wsl))
 
 (leaf company
   :ensure t
@@ -141,7 +160,7 @@
         :custom ((inferior-lisp-program . "ros -Q run"))))))
 
 (leaf scheme-mode*
-  :custom '((scheme-program-name . "gosh -i")))
+  :custom ((scheme-program-name . "gosh -i")))
 
 ;; (leaf web-mode
 ;;   :ensure t
