@@ -106,6 +106,12 @@ if [ -d "${HOME}/.pyenv" ] && [ -d "${PYENV_ROOT}/bin" ]; then
 	eval "$(register-python-argcomplete pipx)"
 fi
 
+# codex
+codex_completion="${HOME}/dotfiles/codex/codex-completion.sh"
+if [ -e "${codex_completion}" ]; then
+	source "${codex_completion}"
+fi
+
 # Starship
 if which starship > /dev/null 2>&1; then
 	eval "$(starship init bash)"
