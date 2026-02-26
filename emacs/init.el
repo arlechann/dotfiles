@@ -145,20 +145,18 @@
   (add-to-list 'auto-mode-alist '("\\.lisp\\'" . lisp-mode))
   (let ((slime-quicklisp-helper-path (expand-file-name "~/quicklisp/slime-helper.el"))
         (roswell-helper-path (expand-file-name "~/.roswell/helper.el")))
-    (leaf slime*
+    (leaf slime
+      :when (not (file-exists-p roswell-helper-path))
+      :ensure t
+      :custom ((inferior-lisp-program . "sbcl"))
       :config
-      (leaf slime
-        :when (not (file-exists-p roswell-helper-path))
-        :ensure t
-        :custom ((inferior-lisp-program . "sbcl"))
-        :config
-        (leaf quicklisp-slime-helper
-          :when (file-readable-p slime-quicklisp-helper-path)
-          :init (load slime-quicklisp-helper-path)))
-      (leaf roswell-slime
-        :when (file-exists-p roswell-helper-path)
-        :init (load (expand-file-name roswell-helper-path))
-        :custom ((inferior-lisp-program . "ros -Q run"))))))
+      (leaf quicklisp-slime-helper
+        :when (file-readable-p slime-quicklisp-helper-path)
+        :init (load slime-quicklisp-helper-path)))
+    (leaf roswell-slime
+      :when (file-exists-p roswell-helper-path)
+      :init (load (expand-file-name roswell-helper-path))
+      :custom ((inferior-lisp-program . "ros -Q run")))))
 
 (leaf scheme-mode*
   :custom ((scheme-program-name . "gosh -i")))
