@@ -36,6 +36,13 @@ if [ -d "${nvm_init_dir}" ]; then
 	alias npx='unalias nvm node npm npx && source "${nvm_init_dir}/nvm.sh" && source "${nvm_init_dir}/bash_completion" && npx'
 fi
 
+# fnm
+fnm_path="${HOME}/.local/share/fnm"
+if [ -d "$fnm_path" ]; then
+  export PATH="$fnm_path:$PATH"
+  eval "$(fnm env)"
+fi
+
 # cargo
 [ -e "${HOME}/.cargo/env" ] && source "${HOME}/.cargo/env"
 
@@ -61,6 +68,17 @@ if [ -d "${HOME}/.ghcup" ]; then
 	fi
 fi
 
+# sdkman(java)
+export SDKMAN_DIR="${HOME}/.sdkman"
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+
+# android
+if [ -d "${HOME}/Android/Sdk" ]; then
+	export ANDROID_SDK_ROOT="${HOME}/Android/Sdk"
+	export ANDROID_HOME="${ANDROID_SDK_ROOT}"
+	export PATH="${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${ANDROID_SDK_ROOT}/platform-tools:${PATH}"
+fi
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -84,26 +102,6 @@ fi
 if [ -e /usr/share/fzf/key-bindings.bash ] && [ -e /usr/share/fzf/completion.bash ]; then
 	source /usr/share/fzf/key-bindings.bash
 	source /usr/share/fzf/completion.bash
-fi
-
-# nvm
-if [ -d "${nvm_init_dir}" ]; then
-	alias nvm='unalias nvm node npm npx && source "${nvm_init_dir}/nvm.sh" && source "${nvm_init_dir}/bash_completion" && nvm'
-	alias node='unalias nvm node npm npx && source "${nvm_init_dir}/nvm.sh" && source "${nvm_init_dir}/bash_completion" && node'
-	alias npm='unalias nvm node npm npx && source "${nvm_init_dir}/nvm.sh" && source "${nvm_init_dir}/bash_completion" && npm'
-	alias npx='unalias nvm node npm npx && source "${nvm_init_dir}/nvm.sh" && source "${nvm_init_dir}/bash_completion" && npx'
-fi
-
-# fnm
-FNM_PATH="${HOME}/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="$FNM_PATH:$PATH"
-  eval "$(fnm env)"
-fi
-
-# pyenv
-if [ -d "${HOME}/.pyenv" ] && [ -d "${PYENV_ROOT}/bin" ]; then
-	eval "$(register-python-argcomplete pipx)"
 fi
 
 # codex

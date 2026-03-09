@@ -20,6 +20,10 @@
 (setf sb-impl::*default-external-format* :utf-8
       sb-alien::*default-c-string-external-format* :utf-8)
 
+;; require
+(require :asdf)
+(require :uiop)
+
 ;; quicklisp
 #-quicklisp
 (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
