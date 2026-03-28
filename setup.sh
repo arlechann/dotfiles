@@ -79,11 +79,11 @@ while [ "$#" -gt 0 ]; do
 done
 
 link_dir_to_home "$SCRIPT_PATH/bash"
-link_dir_to_home "$SCRIPT_PATH/zsh"
+#link_dir_to_home "$SCRIPT_PATH/zsh"
 link_dir_to_home "$SCRIPT_PATH/vim"
 link_dir_to_home "$SCRIPT_PATH/tmux"
 link_dir_to_home "$SCRIPT_PATH/lisp"
-link_dir_to_home "$SCRIPT_PATH/readline"
+#link_dir_to_home "$SCRIPT_PATH/readline"
 
 if [ "$INSTALL_X_CONFIGS" = "1" ]; then
   link_dir_to_home "$SCRIPT_PATH/xwindow"
@@ -94,7 +94,7 @@ fi
 
 link_path "$SCRIPT_PATH/vimfiles" "$HOME/.vim"
 link_path "$SCRIPT_PATH/emacs" "$HOME/.emacs.d"
-link_path "$SCRIPT_PATH/lem" "$HOME/.lem"
+#link_path "$SCRIPT_PATH/lem" "$HOME/.lem"
 
 if [ -d "$SCRIPT_PATH/shellutils" ]; then
   (
