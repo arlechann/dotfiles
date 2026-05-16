@@ -40,7 +40,13 @@ fi
 fnm_path="${HOME}/.local/share/fnm"
 if [ -d "$fnm_path" ]; then
   export PATH="$fnm_path:$PATH"
-  eval "$(fnm env)"
+  if [ -n "${CODEX_CI:-}" ]; then
+    if [ -n "${FNM_MULTISHELL_PATH:-}" ] && [ -d "${FNM_MULTISHELL_PATH}/bin" ]; then
+      export PATH="${FNM_MULTISHELL_PATH}/bin:$PATH"
+    fi
+  else
+    eval "$(fnm env)"
+  fi
 fi
 
 # cargo
@@ -114,4 +120,3 @@ fi
 if which starship > /dev/null 2>&1; then
 	eval "$(starship init bash)"
 fi
-
