@@ -31,3 +31,8 @@
   (when (probe-file quicklisp-init)
     (load quicklisp-init)))
 
+;; mylib
+(let ((system-name :mylib))
+  (when (asdf:find-system system-name nil)
+    (asdf:load-system system-name)))
+
