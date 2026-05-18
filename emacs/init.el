@@ -64,6 +64,10 @@
 (leaf show-paren
   :global-minor-mode show-paren-mode)
 
+(leaf rainbow-delimiters
+  :ensure t
+  :hook ((prog-mode-hook . rainbow-delimiters-mode)))
+
 (leaf font-setting
   :config (setq default-frame-alist
                 (append (list '(font . "HackGen Console NF-11")
@@ -71,8 +75,7 @@
 
 (leaf solarized-theme
   :ensure t
-  :when nil
-  :when window-system
+  :unless window-system
   :config (load-theme 'solarized-dark t))
 
 (leaf doom*
@@ -186,4 +189,3 @@
         (move-beginning-of-line 1))))
 
 (global-set-key "\C-a" 'my/move-beginning-of-line)
-
