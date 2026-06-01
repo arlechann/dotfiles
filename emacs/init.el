@@ -1,3 +1,4 @@
+
 ;; launguage
 (set-language-environment 'Japanese)
 (set-language-environment 'utf-8)
@@ -27,8 +28,10 @@
     (leaf-keywords-init)))
 
 ;; packages
-(leaf custom-file-path
-  :custom `((custom-file . ,(locate-user-emacs-file "custom.el"))))
+(leaf custom-file
+  :custom `((custom-file . ,(locate-user-emacs-file "custom.el")))
+  :config
+  (load custom-file 'noerror))
 
 (leaf custom-set-value
   :preface (defun c/redraw-frame ()
@@ -43,7 +46,7 @@
            (scroll-preserve-screen-position . nil)
            (scroll-conservatively . 1) ; scroll a line
            (mouse-wheel-scroll-amount . '(1 ((control) . 5)))
-           (ring-bell-funcation . 'ignore) ; no bell
+           (ring-bell-function . 'ignore) ; no bell
            (menu-bar-mode . t) ; show menu bar on gui
            (tool-bar-mode . nil) ; hide tool bar on gui
            (scroll-bar-mode . t) ; use scroll bar on gui
@@ -70,8 +73,8 @@
 
 (leaf font-setting
   :config (setq default-frame-alist
-                (append (list '(font . "HackGen Console NF-11")
-                        default-frame-alist))))
+                (append (list '(font . "HackGen Console NF-11"))
+                        default-frame-alist)))
 
 (leaf solarized-theme
   :ensure t
@@ -91,6 +94,7 @@
     (doom-themes-neotree-config)
     (doom-themes-org-config))
   (leaf doom-modeline
+    :ensure t
     :custom ((doom-modeline-buffer-file-name-style . 'truncate-with-project)
              (doom-modeline-icon . t)
              (doom-modeline-major-mode-icon . nil)
@@ -123,6 +127,12 @@
                              (or buffer "*wsl-shell*"))))
   (defalias 'shell #'my/shell-wsl))
 
+(leaf magit
+  :ensure t
+  :commands (magit-status magit-dispatch)
+  :bind (("C-x g" . magit-status)
+         ("C-x M-g" . magit-dispatch)))
+
 (leaf company
   :ensure t
   :blackout t
@@ -138,7 +148,7 @@
     ("C-n" . company-select-next)
     ("C-p" . company-select-previous)))
   :custom ((company-idle-delay . 0)
-     (company-minimux-prefix-length . 1)
+     (company-minimum-prefix-length . 1)
      (company-transformers . '(company-sort-by-occurrence)))
   :global-minor-mode global-company-mode)
 
