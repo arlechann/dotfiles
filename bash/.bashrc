@@ -9,6 +9,8 @@ export PATH="${HOME}/bin:${HOME}/.local/bin:${PATH}"
 export EDITOR=vim
 export VISUAL=vim
 
+export LESSCHARSET=utf-8
+
 alias ls='ls --color=auto'
 alias la='ls -Fa --color=always'
 alias ll='ls -Fl --color=always'
