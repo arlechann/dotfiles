@@ -12,15 +12,15 @@ if not "%~1"=="" (
 )
 
 call :link_dir_to_home "%SCRIPT_DIR%\bash"
-call :link_dir_to_home "%SCRIPT_DIR%\zsh"
+rem call :link_dir_to_home "%SCRIPT_DIR%\zsh"
 call :link_dir_to_home "%SCRIPT_DIR%\vim"
-call :link_dir_to_home "%SCRIPT_DIR%\tmux"
+rem call :link_dir_to_home "%SCRIPT_DIR%\tmux"
 call :link_dir_to_home "%SCRIPT_DIR%\lisp"
-call :link_dir_to_home "%SCRIPT_DIR%\readline"
+rem call :link_dir_to_home "%SCRIPT_DIR%\readline"
 
 call :link_path "%SCRIPT_DIR%\vimfiles" "%USERPROFILE%\.vim"
 call :link_path "%SCRIPT_DIR%\emacs" "%USERPROFILE%\.emacs.d"
-call :link_path "%SCRIPT_DIR%\lem" "%USERPROFILE%\.lem"
+rem call :link_path "%SCRIPT_DIR%\lem" "%USERPROFILE%\.lem"
 
 exit /b 0
 
