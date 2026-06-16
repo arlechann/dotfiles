@@ -4,5 +4,6 @@ custom.el
 /eln-cache
 /elpa
 /el-get
+/tree-sitter
 /url
 /transient

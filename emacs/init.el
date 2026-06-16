@@ -3,6 +3,7 @@
 (set-language-environment 'Japanese)
 (set-language-environment 'utf-8)
 (prefer-coding-system 'utf-8)
+(set-coding-system-priority 'utf-8 'cp932)
 
 ;; leaf install code
 (eval-and-compile
@@ -174,22 +175,145 @@
 (leaf scheme-mode*
   :custom ((scheme-program-name . "gosh -i")))
 
-;; (leaf web-mode
-;;   :ensure t
-;;   :mode (("\\.html\\'" . web-mode)
-;;          ("\\.css\\'" . web-mode)
-;;          ("\\.[jt]sx?\\'" . web-mode))
-;;   :custom ((web-mode-enable-auto-paring . t)
-;;            (web-mode-enable-css-colorization . t)
-;;            (web-mode-enable-current-element-highlight . t)
-;;            (web-mode-enable-current-column-highlight . t))
-;;   :hook ((local-write-file-hooks . (lambda () (delete-trailing-whitespace) nil))))
+(defvar treesit-language-source-alist nil)
 
-;; (leaf lsp-mode
-;;   :if nil
-;;   :ensure t
-;;   :config (lsp lsp-deferred)
-;;   :hook ((web-mode . #'lsp)))
+(defun my/install-js-ts-treesit-grammars ()
+  (interactive)
+  (dolist (language '(javascript jsx typescript tsx))
+    (treesit-install-language-grammar language)))
+
+(defun my/install-html-treesit-grammars ()
+  (interactive)
+  (dolist (language '(html))
+    (treesit-install-language-grammar language)))
+
+(defun my/install-css-treesit-grammars ()
+  (interactive)
+  (dolist (language '(css))
+    (treesit-install-language-grammar language)))
+
+(defun my/install-json-treesit-grammars ()
+  (interactive)
+  (dolist (language '(json))
+    (treesit-install-language-grammar language)))
+
+(defun my/install-svg-treesit-grammars ()
+  (interactive)
+  (dolist (language '(xml))
+    (treesit-install-language-grammar language)))
+
+(defun my/install-all-treesit-grammars ()
+  (interactive)
+  (my/install-js-ts-treesit-grammars)
+  (my/install-html-treesit-grammars)
+  (my/install-css-treesit-grammars)
+  (my/install-json-treesit-grammars)
+  (my/install-svg-treesit-grammars))
+
+(leaf js-ts-mode*
+  :preface
+  (dolist (spec '(("\\.js\\'" . js-ts-mode)
+                  ("\\.jsx\\'" . js-ts-mode)
+                  ("\\.mjs\\'" . js-ts-mode)
+                  ("\\.cjs\\'" . js-ts-mode)
+                  ("\\.ts\\'" . typescript-ts-mode)
+                  ("\\.tsx\\'" . tsx-ts-mode)))
+    (add-to-list 'auto-mode-alist spec))
+  :config
+  (dolist (source '((javascript . ("https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
+                    (jsx . ("https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
+                    (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+                    (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))))
+    (add-to-list 'treesit-language-source-alist source)))
+
+(leaf html-ts-mode*
+  :preface
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . html-ts-mode))
+  :config
+  (add-to-list 'treesit-language-source-alist
+               '(html . ("https://github.com/tree-sitter/tree-sitter-html" "master" "src"))))
+
+(leaf css-ts-mode*
+  :preface
+  (add-to-list 'auto-mode-alist '("\\.css\\'" . css-ts-mode))
+  :config
+  (add-to-list 'treesit-language-source-alist
+               '(css . ("https://github.com/tree-sitter/tree-sitter-css" "master" "src"))))
+
+(leaf json-ts-mode*
+  :preface
+  (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
+  :config
+  (add-to-list 'treesit-language-source-alist
+               '(json . ("https://github.com/tree-sitter/tree-sitter-json" "master" "src"))))
+
+(leaf svg-mode*
+  :preface
+  (add-to-list 'auto-mode-alist '("\\.svg\\'" . nxml-mode))
+  :config
+  (add-to-list 'treesit-language-source-alist
+               '(xml . ("https://github.com/tree-sitter-grammars/tree-sitter-xml" "master" "xml/src"))))
+
+(defun my/node-executable (name)
+  (let* ((project-root (or (locate-dominating-file default-directory "node_modules")
+                           (locate-dominating-file default-directory "package.json")))
+         (bin-directory (and project-root
+                             (expand-file-name "node_modules/.bin/" project-root)))
+         (suffix (if (eq system-type 'windows-nt) ".cmd" ""))
+         (local-path (and bin-directory
+                          (expand-file-name (concat name suffix) bin-directory))))
+    (if (and local-path (file-executable-p local-path))
+        local-path
+        (or (executable-find name)
+            (and (not (string-empty-p suffix))
+                 (executable-find (concat name suffix)))))))
+
+(leaf eglot
+  :preface
+  (defun my/eglot-js-ts-contact (&optional _interactive)
+    (list (or (my/node-executable "typescript-language-server")
+              "typescript-language-server")
+          "--stdio"))
+  (defun my/eglot-js-ts-setup ()
+    (setq-local eglot-stay-out-of '(flymake))
+    (when-let ((eslint (my/node-executable "eslint")))
+      (setq-local flycheck-javascript-eslint-executable eslint))
+    (setq-local flycheck-checker 'javascript-eslint)
+    (eglot-ensure)
+    (when (fboundp 'apheleia-mode)
+      (apheleia-mode 1))
+    (when (fboundp 'flycheck-mode)
+      (flycheck-mode 1)))
+  :hook ((js-ts-mode-hook . my/eglot-js-ts-setup)
+         (typescript-ts-mode-hook . my/eglot-js-ts-setup)
+         (tsx-ts-mode-hook . my/eglot-js-ts-setup))
+  :config
+  (add-to-list 'eglot-server-programs
+               '((js-ts-mode typescript-ts-mode tsx-ts-mode) . my/eglot-js-ts-contact)))
+
+(leaf apheleia
+  :ensure t
+  :preface
+  (defun my/apheleia-js-ts-prettier ()
+    (or (my/node-executable "prettier")
+        "prettier"))
+  :config
+  (when (boundp 'apheleia-formatters)
+    (setf (alist-get 'prettier apheleia-formatters)
+          '(my/apheleia-js-ts-prettier "--stdin-filepath" filepath)))
+  (when (boundp 'apheleia-mode-alist)
+    (dolist (mode '(js-ts-mode typescript-ts-mode tsx-ts-mode))
+      (setf (alist-get mode apheleia-mode-alist) 'prettier))))
+
+(leaf flycheck
+  :ensure t
+  :hook ((js-ts-mode-hook . flycheck-mode)
+         (typescript-ts-mode-hook . flycheck-mode)
+         (tsx-ts-mode-hook . flycheck-mode))
+  :config
+  (when (fboundp 'flycheck-add-mode)
+    (flycheck-add-mode 'javascript-eslint 'typescript-ts-mode)
+    (flycheck-add-mode 'javascript-eslint 'tsx-ts-mode)))
 
 (defun my/move-beginning-of-line (&optional position)
   (interactive)
