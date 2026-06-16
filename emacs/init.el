@@ -254,7 +254,32 @@
   (add-to-list 'treesit-language-source-alist
                '(xml . ("https://github.com/tree-sitter-grammars/tree-sitter-xml" "master" "xml/src"))))
 
+(defun my/node-version-root ()
+  (or (locate-dominating-file default-directory ".nvmrc")
+      (locate-dominating-file default-directory ".node-version")))
+
+(defun my/activate-node-version-environment ()
+  (when-let ((project-root (my/node-version-root))
+             (shell (or (executable-find "bash") shell-file-name)))
+    (with-temp-buffer
+      (let ((default-directory project-root))
+        (when (eq 0 (process-file
+                     shell nil (current-buffer) nil "-lc"
+                     (mapconcat
+                      #'identity
+                      '("if [ -z \"${NVM_DIR:-}\" ]; then NVM_DIR=\"$HOME/.nvm\"; fi"
+                        "if [ -s \"$NVM_DIR/nvm.sh\" ]; then . \"$NVM_DIR/nvm.sh\"; fi"
+                        "if command -v fnm >/dev/null 2>&1; then eval \"$(fnm env --shell bash)\"; fnm use --silent-if-unchanged >/dev/null 2>&1 || fnm use >/dev/null 2>&1 || true; fi"
+                        "if command -v nvm >/dev/null 2>&1; then nvm use --silent >/dev/null 2>&1 || nvm use >/dev/null 2>&1 || true; fi"
+                        "printf %s \"$PATH\"")
+                      "; ")))
+          (let ((path (string-trim (buffer-string))))
+            (setq exec-path (parse-colon-path path))
+            (setenv "PATH" path)
+            t))))))
+
 (defun my/node-executable (name)
+  (my/activate-node-version-environment)
   (let* ((project-root (or (locate-dominating-file default-directory "node_modules")
                            (locate-dominating-file default-directory "package.json")))
          (bin-directory (and project-root
